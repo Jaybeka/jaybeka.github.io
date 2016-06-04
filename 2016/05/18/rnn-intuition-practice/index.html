@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html lang="zh-CN">
 <head>
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
@@ -11,32 +11,29 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="format-detection" content="telephone=no" />
-<meta name="author" content="John Doe" />
+<meta name="author" content="Sicong Yang" />
 
 
 
-<meta name="description" content="RNN的理解与实践对于RNN和CNN的区别，最感性的认识就是CNN适用于做网格计算，所以经常被应用于图像处理的问题；而RNN更适用于处理序列，所以经常被应用于文本的处理。而对RNN的兴趣源于寒小阳&amp;amp;龙心尘的一篇博文，可以利用神经网络模仿人类写作，可以跑出来具有小四风格的文章段落。正好有师妹推荐了新晋机器学习Python神库Keras，那就理论加实践一起认识一下神奇的循环神经网络吧。
-[TO">
+<meta name="description" content="RNN的理解与实践对于RNN和CNN的区别，最感性的认识就是CNN适用于做网格计算，所以经常被应用于图像处理的问题；而RNN更适用于处理序列，所以经常被应用于文本的处理。而对RNN的兴趣源于寒小阳&amp;amp;龙心尘的一篇博文，可以利用神经网络模仿人类写作，可以跑出来具有小四风格的文章段落。正好有师妹推荐了新晋机器学习Python神库Keras，那就理论加实践一起认识一下神奇的循环神经网络吧。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RNN的理解与实践">
-<meta property="og:url" content="http://yoursite.com/2016/05/18/rnn-intuition-practice/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="RNN的理解与实践对于RNN和CNN的区别，最感性的认识就是CNN适用于做网格计算，所以经常被应用于图像处理的问题；而RNN更适用于处理序列，所以经常被应用于文本的处理。而对RNN的兴趣源于寒小阳&amp;amp;龙心尘的一篇博文，可以利用神经网络模仿人类写作，可以跑出来具有小四风格的文章段落。正好有师妹推荐了新晋机器学习Python神库Keras，那就理论加实践一起认识一下神奇的循环神经网络吧。
-[TO">
-<meta property="og:image" content="http://yoursite.com/media/14645284410919/14645287824259.jpg">
-<meta property="og:image" content="http://yoursite.com/media/14645284410919/14645288838283.jpg">
-<meta property="og:image" content="http://yoursite.com/media/14645284410919/14645284557703.jpg">
-<meta property="og:updated_time" content="2016-06-01T15:00:43.000Z">
+<meta property="og:url" content="http://jaybeka.github.io/2016/05/18/rnn-intuition-practice/index.html">
+<meta property="og:site_name" content="Boom! Bang!">
+<meta property="og:description" content="RNN的理解与实践对于RNN和CNN的区别，最感性的认识就是CNN适用于做网格计算，所以经常被应用于图像处理的问题；而RNN更适用于处理序列，所以经常被应用于文本的处理。而对RNN的兴趣源于寒小阳&amp;amp;龙心尘的一篇博文，可以利用神经网络模仿人类写作，可以跑出来具有小四风格的文章段落。正好有师妹推荐了新晋机器学习Python神库Keras，那就理论加实践一起认识一下神奇的循环神经网络吧。">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/14645287824259.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/14645288838283.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/char-rnn-intu.jpg">
+<meta property="og:updated_time" content="2016-06-04T15:40:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RNN的理解与实践">
-<meta name="twitter:description" content="RNN的理解与实践对于RNN和CNN的区别，最感性的认识就是CNN适用于做网格计算，所以经常被应用于图像处理的问题；而RNN更适用于处理序列，所以经常被应用于文本的处理。而对RNN的兴趣源于寒小阳&amp;amp;龙心尘的一篇博文，可以利用神经网络模仿人类写作，可以跑出来具有小四风格的文章段落。正好有师妹推荐了新晋机器学习Python神库Keras，那就理论加实践一起认识一下神奇的循环神经网络吧。
-[TO">
-<meta name="twitter:image" content="http://yoursite.com/media/14645284410919/14645287824259.jpg">
+<meta name="twitter:description" content="RNN的理解与实践对于RNN和CNN的区别，最感性的认识就是CNN适用于做网格计算，所以经常被应用于图像处理的问题；而RNN更适用于处理序列，所以经常被应用于文本的处理。而对RNN的兴趣源于寒小阳&amp;amp;龙心尘的一篇博文，可以利用神经网络模仿人类写作，可以跑出来具有小四风格的文章段落。正好有师妹推荐了新晋机器学习Python神库Keras，那就理论加实践一起认识一下神奇的循环神经网络吧。">
+<meta name="twitter:image" content="http://o86wlfaos.bkt.clouddn.com//images/14645287824259.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
 
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Boom! Bang!" type="application/atom+xml">
 
 
 
@@ -63,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>RNN的理解与实践 | Hexo</title>
+<title>RNN的理解与实践 | Boom! Bang!</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -107,9 +104,11 @@
             <img src="/img/avatar.png" class="animated zoomIn">
         </a>
         <hgroup>
-          <h1 class="header-author"><a href="/">John Doe</a></h1>
+          <h1 class="header-author"><a href="/">Sicong Yang</a></h1>
         </hgroup>
 
+        
+        <p class="header-subtitle">Pull the triger! Make it happen!</p>
         
 
         
@@ -144,13 +143,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>Menu</li>
-                        <li>Tags</li>
+                        <li>菜单</li>
+                        <li>标签</li>
                         
-                        <li>Friends</li>
+                        <li>友情链接</li>
                         
                         
-                        <li>About Me</li>
+                        <li>关于我</li>
                         
                     </ul>
                 </div>
@@ -166,8 +165,6 @@
                             <li><a href="/">主页</a></li>
                         
                             <li><a href="/archives/">所有文章</a></li>
-                        
-                            <li><a href="/tags/">标签云</a></li>
                         
                             <li><a href="/about/">关于我</a></li>
                         
@@ -189,7 +186,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN-Keras/">RNN; Keras</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
                     </div>
                 </section>
                 
@@ -224,7 +221,7 @@
       <nav id="mobile-nav">
       <div class="overlay">
           <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">John Doe</a></h1>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Sicong Yang</a></h1>
       </div>
     <div class="intrude-less">
         <header id="header" class="inner">
@@ -232,8 +229,10 @@
                 <img src="/img/avatar.png" class="animated zoomIn">
             </a>
             <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">John Doe</a></h1>
+              <h1 class="header-author"><a href="/" title="回到主页">Sicong Yang</a></h1>
             </hgroup>
+            
+            <p class="header-subtitle">Pull the triger! Make it happen!</p>
             
             <nav class="header-menu">
                 <ul>
@@ -241,8 +240,6 @@
                     <li><a href="/">主页</a></li>
                 
                     <li><a href="/archives/">所有文章</a></li>
-                
-                    <li><a href="/tags/">标签云</a></li>
                 
                     <li><a href="/about/">关于我</a></li>
                 
@@ -262,7 +259,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap"><article id="post-rnn-intuition-practice" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -292,7 +289,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RNN-Keras/">RNN; Keras</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keras/">Keras</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RNN/">RNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -303,16 +300,19 @@
       
           
         <h1 id="RNN的理解与实践"><a href="#RNN的理解与实践" class="headerlink" title="RNN的理解与实践"></a>RNN的理解与实践</h1><p>对于RNN和CNN的区别，最感性的认识就是CNN适用于做网格计算，所以经常被应用于图像处理的问题；而RNN更适用于处理序列，所以经常被应用于文本的处理。而对RNN的兴趣源于寒小阳&amp;龙心尘的一篇<a href="http://blog.csdn.net/han_xiaoyang/article/details/51253274" target="_blank" rel="external">博文</a>，可以利用神经网络模仿人类写作，可以跑出来具有小四风格的文章段落。正好有师妹推荐了新晋机器学习Python神库Keras，那就理论加实践一起认识一下神奇的循环神经网络吧。</p>
-<p>[TOC]</p>
+<ul>
+<li><a id="more"></a>
+</li>
+</ul>
 <h2 id="RNN结构及原理浅析"><a href="#RNN结构及原理浅析" class="headerlink" title="RNN结构及原理浅析"></a>RNN结构及原理浅析</h2><p>首先，需要说明的是，RNN依然是一个神经网络，其基本结构与普通的神经网络基本一致，如下图所示<a href="http://www.cnblogs.com/neopenx/p/4623328.html" target="_blank" rel="external">Ref</a>：</p>
-<p><img src="media/14645284410919/14645287824259.jpg" alt="RNN网络结构"></p>
+<img title="RNN神经网络结构图" alt="RNN神经网络结构图" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/14645287824259.jpg">
 <p>但所不同的是，传统的神经网络（包括CNN）假定所有输入和输出都是相互独立的。而RNN的基本假设是输入序列之间是存在相互影响的。RNN之所以被称为循环，就是它会按照序列的输入时间不断重复训练该网络，并利用后向传播算法不断迭代更新权重$(U, V, W)$，这也就是为什么可以将RNN一层网络“展开”为$n$层，而$n$是序列输入的长度，也是时间总步长。同时，不难理解为什么一个RNN层“展开”的结点都共用一套参数。这里的“展开”是虚拟的。</p>
-<p><img src="media/14645284410919/14645288838283.jpg" alt="RNN更新过程"></p>
+<img title="RNN更新过程" alt="RNN更新过程" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/14645288838283.jpg">
 <p>其中，$U$是从输入层到隐藏层$S$的参数，$W$是$t$时刻到$t+1$时刻的参数，$V$是隐藏层到输出层的参数。图片来源于Bengio的<em>Deep Learning</em>一书中第二部分第10章<a href="http://www.deeplearningbook.org/contents/rnn.html" target="_blank" rel="external">Sequence Modeling: Recurrent and Recursive Nets</a>。</p>
 <p>RNN的基本算法如下：</p>
 <ol>
 <li>$x_t$是$t$时刻的输入，可以是单词或者句子的One-hot编码；</li>
-<li>隐藏层$s_t=f(Ux<em>t + Ws</em>{t-1})$，通常函数$f$会选择tanh或者ReLU，$s<em>{t-1}$是前一时刻的隐藏状态，当$t=0$时，$s</em>{-1}$通常被初始化为0向量；</li>
+<li>隐藏层$s_t=f(Ux_t+Ws_{t-1})$，通常函数$f$会选择tanh或者ReLU，$s_{t-1}$是前一时刻的隐藏状态，当$t=0$时，$s_{-1}$通常被初始化为0向量；</li>
 <li>输出$o_t=\mathrm{Softmax}(Vs_t)$。</li>
 </ol>
 <p>值得注意的是，虽然隐藏层状态的更新经历了全输入序列，但由于神经网络参数训练的机制，只有当前时刻前近段时间内输入对其有影响，这也是符合人类记忆的基本规律。</p>
@@ -320,7 +320,7 @@
 <h2 id="Character-Level-RNN"><a href="#Character-Level-RNN" class="headerlink" title="Character-Level RNN"></a>Character-Level RNN</h2><p>大神Karpathy在其一篇<a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank" rel="external">博客</a>上面提到了Character-level RNN（以下简称char-RNN）最初的想法便是扔给RNN一堆文本，让其从字母级别进行学习，让RNN写出以某字母或者某单词开始，最可能的字符序列，组织成词或者句子。</p>
 <p>例如有四个字母h, e, l, o。将其映射成k维的向量，用<code>hello</code>作为训练样本对网络进行训练。完成训练后，以h为首字母，让网络自动输出最有可能的字母接在后面，组成一个单词。</p>
 <p>例子很简单，最终肯定会生成单词<code>hello</code>，而举这个例子的目的是理解char_RNN的工作原理。第一步先扔给RNN一个字母h，后面接“h”的置信度是1.0,接e是2.2，接“l”是-3.0，接“o”4.1. 因为我们的训练数据是“hello”，所以对于下一个字母“e”我们想要提高其的置信度（绿色）并降低其他字母的置信度（红色）. 同样地，我们每走一步都要提高绿色字母的置信度。因为RNN组成均可微，所以可以采用backpropagation算法调整权重。然后，我们可以执行参数更新。如果我们持续喂给RNN同样的输入后，会发现正确的字符 (如第一步中的”e”) 的置信度便会稍高，而不正确的字符的置信度将会稍低。我们然后重复这个过程多次，直到网络收敛和其预测就是最终符合训练数据，下一步就总是正确的字符。</p>
-<p><img src="media/14645284410919/14645284557703.jpg" alt="char-RNN原理示意图"></p>
+<img title="char-RNN原理" alt="char-RNN原理示意图" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/char-rnn-intu.jpg">
 <p>更具体的细节，例如会同时用标准的Softmax分类器同步更新输出变量。RNN用mini-batch随机梯度下降算法更新参数(mini-batch Stochastic Gradient Descent)，或者也可以用RMSProp或Adam (per-parameter adaptive learning rate methods)更新参数。需要注意的是，训练数据中有两个“l”，而两个“l”出现的置信度是不一样的，这是因为RNN依赖于上下文，而不仅仅是前一个字母。</p>
 <p>在测试时，我们会得到下一个可能的字母的概率分布，依据这个概率分布可以得到下一下最有可能出现的字母，重复这个过程，来看看出现什么奇迹吧！</p>
 <p>出于教学的目的，作者Karpathy用Python/numpy写了一个小的character-level RNN语言模型的<a href="https://gist.github.com/karpathy/d4dee566867f8291f086" target="_blank" rel="external">Demo</a>（需翻墙）。只有100行代码，这里贴出来与大家分享，希望可以给大家一些直观的具体的理解。现在作者Karpathy及其团队更专注于更快更强的Lua/Torch代码库。</p>
@@ -392,17 +392,17 @@ I will confess him with your infroch
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2016/05/18/rnn-intuition-practice/">RNN的理解与实践</a></p>
-        <p><span>Author:</span><a href="/" title="Back to Homepage">John Doe</a></p>
-        <p><span>Created:</span>2016-05-18, 23:31:10</p>
-        <p><span>Updated:</span>2016-06-01, 23:00:43</p>
+        <p><span>本文标题:</span><a href="/2016/05/18/rnn-intuition-practice/">RNN的理解与实践</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Sicong Yang</a></p>
+        <p><span>发布时间:</span>2016-05-18, 23:31:10</p>
+        <p><span>最后更新:</span>2016-06-04, 23:40:21</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2016/05/18/rnn-intuition-practice/" title="RNN的理解与实践">http://yoursite.com/2016/05/18/rnn-intuition-practice/</a>
-            <span class="copy-path" data-clipboard-text="From http://yoursite.com/2016/05/18/rnn-intuition-practice/　　By John Doe" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/05/18/rnn-intuition-practice/" title="RNN的理解与实践">http://jaybeka.github.io/2016/05/18/rnn-intuition-practice/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jaybeka.github.io/2016/05/18/rnn-intuition-practice/　　作者: Sicong Yang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
     </div>
 
@@ -423,7 +423,7 @@ I will confess him with your infroch
 </article>
 
     <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
+    <strong class="toc-title">文章目录</strong>
     <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RNN的理解与实践"><span class="toc-number">1.</span> <span class="toc-text">RNN的理解与实践</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#RNN结构及原理浅析"><span class="toc-number">1.1.</span> <span class="toc-text">RNN结构及原理浅析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Character-Level-RNN"><span class="toc-number">1.2.</span> <span class="toc-text">Character-Level RNN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Keras"><span class="toc-number">1.3.</span> <span class="toc-text">Keras</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Char-RNN-Using-Keras"><span class="toc-number">1.4.</span> <span class="toc-text">Char-RNN Using Keras</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扯些闲篇"><span class="toc-number">1.5.</span> <span class="toc-text">扯些闲篇</span></a></li></ol></li></ol>
 </div>
 <style>
@@ -435,10 +435,10 @@ I will confess him with your infroch
     }
 </style>
 
-<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 <script>
-    var valueHide = "Hide";
-    var valueShow = "Show";
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
 
     if ($(".left-col").is(":hidden")) {
         $("#tocButton").attr("value", valueShow);
@@ -481,7 +481,7 @@ I will confess him with your infroch
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"RNN的理解与实践　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"RNN的理解与实践　| Boom! Bang!　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -501,13 +501,13 @@ I will confess him with your infroch
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
-        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/05/16/hello-world/" title="Next: Hello World">
+            <a href="/2016/05/16/hello-world/" title="下一篇: Hello World">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -527,17 +527,17 @@ I will confess him with your infroch
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016 John Doe
+                2016 Sicong Yang
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >Site Visitors: 
+                        <span id="site-visit" >本站到访数: 
                             <span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
@@ -547,7 +547,7 @@ I will confess him with your infroch
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">Page Hits: 
+                        <span id="page-visit">本页阅读量: 
                             <span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
@@ -580,9 +580,9 @@ I will confess him with your infroch
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" title="Comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>

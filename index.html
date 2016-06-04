@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html lang="zh-CN">
 <head>
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
@@ -11,27 +11,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="format-detection" content="telephone=no" />
-<meta name="author" content="John Doe" />
+<meta name="author" content="Sicong Yang" />
 
 
     
     
 
 
-<meta name="description">
+<meta name="description" content="Pushing myself hard, sharing tech points, learn and make progess together.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description">
+<meta property="og:title" content="Boom! Bang!">
+<meta property="og:url" content="http://jaybeka.github.io/index.html">
+<meta property="og:site_name" content="Boom! Bang!">
+<meta property="og:description" content="Pushing myself hard, sharing tech points, learn and make progess together.">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Boom! Bang!">
+<meta name="twitter:description" content="Pushing myself hard, sharing tech points, learn and make progess together.">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
 
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Boom! Bang!" type="application/atom+xml">
 
 
 
@@ -60,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Hexo</title>
+<title>Boom! Bang!</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -104,9 +104,11 @@
             <img src="/img/avatar.png" class="animated zoomIn">
         </a>
         <hgroup>
-          <h1 class="header-author"><a href="/">John Doe</a></h1>
+          <h1 class="header-author"><a href="/">Sicong Yang</a></h1>
         </hgroup>
 
+        
+        <p class="header-subtitle">Pull the triger! Make it happen!</p>
         
 
         
@@ -141,13 +143,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>Menu</li>
-                        <li>Tags</li>
+                        <li>菜单</li>
+                        <li>标签</li>
                         
-                        <li>Friends</li>
+                        <li>友情链接</li>
                         
                         
-                        <li>About Me</li>
+                        <li>关于我</li>
                         
                     </ul>
                 </div>
@@ -163,8 +165,6 @@
                             <li><a href="/">主页</a></li>
                         
                             <li><a href="/archives/">所有文章</a></li>
-                        
-                            <li><a href="/tags/">标签云</a></li>
                         
                             <li><a href="/about/">关于我</a></li>
                         
@@ -186,7 +186,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN-Keras/">RNN; Keras</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
                     </div>
                 </section>
                 
@@ -221,7 +221,7 @@
       <nav id="mobile-nav">
       <div class="overlay">
           <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">John Doe</a></h1>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Sicong Yang</a></h1>
       </div>
     <div class="intrude-less">
         <header id="header" class="inner">
@@ -229,8 +229,10 @@
                 <img src="/img/avatar.png" class="animated zoomIn">
             </a>
             <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">John Doe</a></h1>
+              <h1 class="header-author"><a href="/" title="回到主页">Sicong Yang</a></h1>
             </hgroup>
+            
+            <p class="header-subtitle">Pull the triger! Make it happen!</p>
             
             <nav class="header-menu">
                 <ul>
@@ -238,8 +240,6 @@
                     <li><a href="/">主页</a></li>
                 
                     <li><a href="/archives/">所有文章</a></li>
-                
-                    <li><a href="/tags/">标签云</a></li>
                 
                     <li><a href="/about/">关于我</a></li>
                 
@@ -259,7 +259,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
   
@@ -290,89 +290,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="RNN的理解与实践"><a href="#RNN的理解与实践" class="headerlink" title="RNN的理解与实践"></a>RNN的理解与实践</h1><p>对于RNN和CNN的区别，最感性的认识就是CNN适用于做网格计算，所以经常被应用于图像处理的问题；而RNN更适用于处理序列，所以经常被应用于文本的处理。而对RNN的兴趣源于寒小阳&amp;龙心尘的一篇<a href="http://blog.csdn.net/han_xiaoyang/article/details/51253274" target="_blank" rel="external">博文</a>，可以利用神经网络模仿人类写作，可以跑出来具有小四风格的文章段落。正好有师妹推荐了新晋机器学习Python神库Keras，那就理论加实践一起认识一下神奇的循环神经网络吧。</p>
-<p>[TOC]</p>
-<h2 id="RNN结构及原理浅析"><a href="#RNN结构及原理浅析" class="headerlink" title="RNN结构及原理浅析"></a>RNN结构及原理浅析</h2><p>首先，需要说明的是，RNN依然是一个神经网络，其基本结构与普通的神经网络基本一致，如下图所示<a href="http://www.cnblogs.com/neopenx/p/4623328.html" target="_blank" rel="external">Ref</a>：</p>
-<p><img src="media/14645284410919/14645287824259.jpg" alt="RNN网络结构"></p>
-<p>但所不同的是，传统的神经网络（包括CNN）假定所有输入和输出都是相互独立的。而RNN的基本假设是输入序列之间是存在相互影响的。RNN之所以被称为循环，就是它会按照序列的输入时间不断重复训练该网络，并利用后向传播算法不断迭代更新权重$(U, V, W)$，这也就是为什么可以将RNN一层网络“展开”为$n$层，而$n$是序列输入的长度，也是时间总步长。同时，不难理解为什么一个RNN层“展开”的结点都共用一套参数。这里的“展开”是虚拟的。</p>
-<p><img src="media/14645284410919/14645288838283.jpg" alt="RNN更新过程"></p>
-<p>其中，$U$是从输入层到隐藏层$S$的参数，$W$是$t$时刻到$t+1$时刻的参数，$V$是隐藏层到输出层的参数。图片来源于Bengio的<em>Deep Learning</em>一书中第二部分第10章<a href="http://www.deeplearningbook.org/contents/rnn.html" target="_blank" rel="external">Sequence Modeling: Recurrent and Recursive Nets</a>。</p>
-<p>RNN的基本算法如下：</p>
-<ol>
-<li>$x_t$是$t$时刻的输入，可以是单词或者句子的One-hot编码；</li>
-<li>隐藏层$s_t=f(Ux<em>t + Ws</em>{t-1})$，通常函数$f$会选择tanh或者ReLU，$s<em>{t-1}$是前一时刻的隐藏状态，当$t=0$时，$s</em>{-1}$通常被初始化为0向量；</li>
-<li>输出$o_t=\mathrm{Softmax}(Vs_t)$。</li>
-</ol>
-<p>值得注意的是，虽然隐藏层状态的更新经历了全输入序列，但由于神经网络参数训练的机制，只有当前时刻前近段时间内输入对其有影响，这也是符合人类记忆的基本规律。</p>
-<p>最简单的RNN介绍到这，在此基础之上还有双向RNN和LSTM，暂时不做展开。我们直接介绍将要用到的character-level RNN。</p>
-<h2 id="Character-Level-RNN"><a href="#Character-Level-RNN" class="headerlink" title="Character-Level RNN"></a>Character-Level RNN</h2><p>大神Karpathy在其一篇<a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank" rel="external">博客</a>上面提到了Character-level RNN（以下简称char-RNN）最初的想法便是扔给RNN一堆文本，让其从字母级别进行学习，让RNN写出以某字母或者某单词开始，最可能的字符序列，组织成词或者句子。</p>
-<p>例如有四个字母h, e, l, o。将其映射成k维的向量，用<code>hello</code>作为训练样本对网络进行训练。完成训练后，以h为首字母，让网络自动输出最有可能的字母接在后面，组成一个单词。</p>
-<p>例子很简单，最终肯定会生成单词<code>hello</code>，而举这个例子的目的是理解char_RNN的工作原理。第一步先扔给RNN一个字母h，后面接“h”的置信度是1.0,接e是2.2，接“l”是-3.0，接“o”4.1. 因为我们的训练数据是“hello”，所以对于下一个字母“e”我们想要提高其的置信度（绿色）并降低其他字母的置信度（红色）. 同样地，我们每走一步都要提高绿色字母的置信度。因为RNN组成均可微，所以可以采用backpropagation算法调整权重。然后，我们可以执行参数更新。如果我们持续喂给RNN同样的输入后，会发现正确的字符 (如第一步中的”e”) 的置信度便会稍高，而不正确的字符的置信度将会稍低。我们然后重复这个过程多次，直到网络收敛和其预测就是最终符合训练数据，下一步就总是正确的字符。</p>
-<p><img src="media/14645284410919/14645284557703.jpg" alt="char-RNN原理示意图"></p>
-<p>更具体的细节，例如会同时用标准的Softmax分类器同步更新输出变量。RNN用mini-batch随机梯度下降算法更新参数(mini-batch Stochastic Gradient Descent)，或者也可以用RMSProp或Adam (per-parameter adaptive learning rate methods)更新参数。需要注意的是，训练数据中有两个“l”，而两个“l”出现的置信度是不一样的，这是因为RNN依赖于上下文，而不仅仅是前一个字母。</p>
-<p>在测试时，我们会得到下一个可能的字母的概率分布，依据这个概率分布可以得到下一下最有可能出现的字母，重复这个过程，来看看出现什么奇迹吧！</p>
-<p>出于教学的目的，作者Karpathy用Python/numpy写了一个小的character-level RNN语言模型的<a href="https://gist.github.com/karpathy/d4dee566867f8291f086" target="_blank" rel="external">Demo</a>（需翻墙）。只有100行代码，这里贴出来与大家分享，希望可以给大家一些直观的具体的理解。现在作者Karpathy及其团队更专注于更快更强的Lua/Torch代码库。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span><br><span class="line">Minimal character-level Vanilla RNN model. Written by Andrej Karpathy (@karpathy)</span><br><span class="line">BSD License</span><br><span class="line">"""</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># data I/O 导入英文纯文本文件，建立词到索引、索引到词的映射</span></span><br><span class="line">data = open(<span class="string">'input.txt'</span>, <span class="string">'r'</span>).read() <span class="comment"># should be simple plain text file</span></span><br><span class="line">chars = list(set(data))</span><br><span class="line">data_size, vocab_size = len(data), len(chars)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'data has %d characters, %d unique.'</span> % (data_size, vocab_size)</span><br><span class="line">char_to_ix = &#123; ch:i <span class="keyword">for</span> i,ch <span class="keyword">in</span> enumerate(chars) &#125;</span><br><span class="line">ix_to_char = &#123; i:ch <span class="keyword">for</span> i,ch <span class="keyword">in</span> enumerate(chars) &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># hyperparameters 定义隐藏层的神经元数量、每一步处理多长的序列以及学习速率</span></span><br><span class="line">hidden_size = <span class="number">100</span> <span class="comment"># size of hidden layer of neurons</span></span><br><span class="line">seq_length = <span class="number">25</span> <span class="comment"># number of steps to unroll the RNN for</span></span><br><span class="line">learning_rate = <span class="number">1e-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># model parameters 随机生成神经网络参数矩阵，Wxh即U，Whh即W，Why即V，以及偏置单元</span></span><br><span class="line">Wxh = np.random.randn(hidden_size, vocab_size)*<span class="number">0.01</span> <span class="comment"># input to hidden</span></span><br><span class="line">Whh = np.random.randn(hidden_size, hidden_size)*<span class="number">0.01</span> <span class="comment"># hidden to hidden</span></span><br><span class="line">Why = np.random.randn(vocab_size, hidden_size)*<span class="number">0.01</span> <span class="comment"># hidden to output</span></span><br><span class="line">bh = np.zeros((hidden_size, <span class="number">1</span>)) <span class="comment"># hidden bias</span></span><br><span class="line">by = np.zeros((vocab_size, <span class="number">1</span>)) <span class="comment"># output bias</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lossFun</span><span class="params">(inputs, targets, hprev)</span>:</span></span><br><span class="line">  <span class="string">"""</span><br><span class="line">  inputs,targets are both list of integers.</span><br><span class="line">  hprev is Hx1 array of initial hidden state</span><br><span class="line">  returns the loss, gradients on model parameters, and last hidden state</span><br><span class="line">  """</span></span><br><span class="line">  xs, hs, ys, ps = &#123;&#125;, &#123;&#125;, &#123;&#125;, &#123;&#125;</span><br><span class="line">  hs[<span class="number">-1</span>] = np.copy(hprev)</span><br><span class="line">  loss = <span class="number">0</span></span><br><span class="line">  <span class="comment"># forward pass 正向传播过程，输入采用1-k向量表示，隐藏层函数采用tanh</span></span><br><span class="line">  <span class="keyword">for</span> t <span class="keyword">in</span> xrange(len(inputs)):</span><br><span class="line">    xs[t] = np.zeros((vocab_size,<span class="number">1</span>)) <span class="comment"># encode in 1-of-k representation</span></span><br><span class="line">    xs[t][inputs[t]] = <span class="number">1</span></span><br><span class="line">    hs[t] = np.tanh(np.dot(Wxh, xs[t]) + np.dot(Whh, hs[t<span class="number">-1</span>]) + bh) <span class="comment"># hidden state 参考文献Learning Recurrent Neural Networks with Hessian-Free Optimization</span></span><br><span class="line">    ys[t] = np.dot(Why, hs[t]) + by <span class="comment"># unnormalized log probabilities for next chars</span></span><br><span class="line">    ps[t] = np.exp(ys[t]) / np.sum(np.exp(ys[t])) <span class="comment"># probabilities for next chars</span></span><br><span class="line">    loss += -np.log(ps[t][targets[t],<span class="number">0</span>]) <span class="comment"># softmax (cross-entropy loss)</span></span><br><span class="line">  <span class="comment"># backward pass: compute gradients going backwards</span></span><br><span class="line">  dWxh, dWhh, dWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)</span><br><span class="line">  dbh, dby = np.zeros_like(bh), np.zeros_like(by)</span><br><span class="line">  dhnext = np.zeros_like(hs[<span class="number">0</span>])</span><br><span class="line">  <span class="keyword">for</span> t <span class="keyword">in</span> reversed(xrange(len(inputs))):</span><br><span class="line">    dy = np.copy(ps[t])</span><br><span class="line">    dy[targets[t]] -= <span class="number">1</span> <span class="comment"># backprop into y. see http://cs231n.github.io/neural-networks-case-study/#grad if confused here</span></span><br><span class="line">    dWhy += np.dot(dy, hs[t].T)</span><br><span class="line">    dby += dy</span><br><span class="line">    dh = np.dot(Why.T, dy) + dhnext <span class="comment"># backprop into h</span></span><br><span class="line">    dhraw = (<span class="number">1</span> - hs[t] * hs[t]) * dh <span class="comment"># backprop through tanh nonlinearity</span></span><br><span class="line">    dbh += dhraw</span><br><span class="line">    dWxh += np.dot(dhraw, xs[t].T)</span><br><span class="line">    dWhh += np.dot(dhraw, hs[t<span class="number">-1</span>].T)</span><br><span class="line">    dhnext = np.dot(Whh.T, dhraw)</span><br><span class="line">  <span class="keyword">for</span> dparam <span class="keyword">in</span> [dWxh, dWhh, dWhy, dbh, dby]:</span><br><span class="line">    np.clip(dparam, <span class="number">-5</span>, <span class="number">5</span>, out=dparam) <span class="comment"># clip to mitigate exploding gradients</span></span><br><span class="line">  <span class="keyword">return</span> loss, dWxh, dWhh, dWhy, dbh, dby, hs[len(inputs)<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample</span><span class="params">(h, seed_ix, n)</span>:</span></span><br><span class="line">  <span class="string">""" </span><br><span class="line">  sample a sequence of integers from the model </span><br><span class="line">  h is memory state, seed_ix is seed letter for first time step</span><br><span class="line">  """</span></span><br><span class="line">  x = np.zeros((vocab_size, <span class="number">1</span>))</span><br><span class="line">  x[seed_ix] = <span class="number">1</span></span><br><span class="line">  ixes = []</span><br><span class="line">  <span class="keyword">for</span> t <span class="keyword">in</span> xrange(n):</span><br><span class="line">    h = np.tanh(np.dot(Wxh, x) + np.dot(Whh, h) + bh)</span><br><span class="line">    y = np.dot(Why, h) + by</span><br><span class="line">    p = np.exp(y) / np.sum(np.exp(y))</span><br><span class="line">    ix = np.random.choice(range(vocab_size), p=p.ravel())</span><br><span class="line">    x = np.zeros((vocab_size, <span class="number">1</span>))</span><br><span class="line">    x[ix] = <span class="number">1</span></span><br><span class="line">    ixes.append(ix)</span><br><span class="line">  <span class="keyword">return</span> ixes</span><br><span class="line"></span><br><span class="line">n, p = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">mWxh, mWhh, mWhy = np.zeros_like(Wxh), np.zeros_like(Whh), np.zeros_like(Why)</span><br><span class="line">mbh, mby = np.zeros_like(bh), np.zeros_like(by) <span class="comment"># memory variables for Adagrad</span></span><br><span class="line">smooth_loss = -np.log(<span class="number">1.0</span>/vocab_size)*seq_length <span class="comment"># loss at iteration 0</span></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">  <span class="comment"># prepare inputs (we're sweeping from left to right in steps seq_length long)</span></span><br><span class="line">  <span class="keyword">if</span> p+seq_length+<span class="number">1</span> &gt;= len(data) <span class="keyword">or</span> n == <span class="number">0</span>: </span><br><span class="line">    hprev = np.zeros((hidden_size,<span class="number">1</span>)) <span class="comment"># reset RNN memory</span></span><br><span class="line">    p = <span class="number">0</span> <span class="comment"># go from start of data</span></span><br><span class="line">  inputs = [char_to_ix[ch] <span class="keyword">for</span> ch <span class="keyword">in</span> data[p:p+seq_length]]</span><br><span class="line">  targets = [char_to_ix[ch] <span class="keyword">for</span> ch <span class="keyword">in</span> data[p+<span class="number">1</span>:p+seq_length+<span class="number">1</span>]]</span><br><span class="line"></span><br><span class="line">  <span class="comment"># sample from the model now and then</span></span><br><span class="line">  <span class="keyword">if</span> n % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">    sample_ix = sample(hprev, inputs[<span class="number">0</span>], <span class="number">200</span>)</span><br><span class="line">    txt = <span class="string">''</span>.join(ix_to_char[ix] <span class="keyword">for</span> ix <span class="keyword">in</span> sample_ix)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'----\n %s \n----'</span> % (txt, )</span><br><span class="line">    </span><br><span class="line">  <span class="comment"># forward seq_length characters through the net and fetch gradient</span></span><br><span class="line">  loss, dWxh, dWhh, dWhy, dbh, dby, hprev = lossFun(inputs, targets, hprev)</span><br><span class="line">  smooth_loss = smooth_loss * <span class="number">0.999</span> + loss * <span class="number">0.001</span></span><br><span class="line">  <span class="keyword">if</span> n % <span class="number">100</span> == <span class="number">0</span>: <span class="keyword">print</span> <span class="string">'iter %d, loss: %f'</span> % (n, smooth_loss) <span class="comment"># print progress</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># perform parameter update with Adagrad</span></span><br><span class="line">  <span class="keyword">for</span> param, dparam, mem <span class="keyword">in</span> zip([Wxh, Whh, Why, bh, by], </span><br><span class="line">                                [dWxh, dWhh, dWhy, dbh, dby], </span><br><span class="line">                                [mWxh, mWhh, mWhy, mbh, mby]):</span><br><span class="line">    mem += dparam * dparam</span><br><span class="line">    param += -learning_rate * dparam / np.sqrt(mem + <span class="number">1e-8</span>) <span class="comment"># adagrad update</span></span><br><span class="line"></span><br><span class="line">  p += seq_length <span class="comment"># move data pointer</span></span><br><span class="line">  n += <span class="number">1</span> <span class="comment"># iteration counter</span></span><br></pre></td></tr></table></figure>
-<h2 id="Keras"><a href="#Keras" class="headerlink" title="Keras"></a>Keras</h2><p>Keras的作者不是希腊人就是对文学很感兴趣，因为Keras在希腊语中意指号角。其文学形象来源于古希腊和拉丁文学，最初出现于Odyssey。梦境被分为被幻像欺骗的人，通过象牙门到达凡间的人，预言家和从号角门中来的人。最近越来越热的深度学习上层封装库，简单列一下优缺点吧，因为使用的话看文档三分钟就可以搭出一个深度学习的模型原型，支持可插拔的神经网络层，不能更赞。但调试不易，且不利于对于原理的理解。</p>
-<p>项目地址：<a href="https://github.com/fchollet/keras" target="_blank" rel="external">https://github.com/fchollet/keras</a><br>文档地址：<a href="http://keras.io/" target="_blank" rel="external">http://keras.io/</a></p>
-<p>优点：</p>
+              <h1 id="RNN的理解与实践"><a href="#RNN的理解与实践" class="headerlink" title="RNN的理解与实践"></a>RNN的理解与实践</h1><p>对于RNN和CNN的区别，最感性的认识就是CNN适用于做网格计算，所以经常被应用于图像处理的问题；而RNN更适用于处理序列，所以经常被应用于文本的处理。而对RNN的兴趣源于寒小阳&amp;龙心尘的一篇<a href="http://blog.csdn.net/han_xiaoyang/article/details/51253274">博文</a>，可以利用神经网络模仿人类写作，可以跑出来具有小四风格的文章段落。正好有师妹推荐了新晋机器学习Python神库Keras，那就理论加实践一起认识一下神奇的循环神经网络吧。</p>
 <ul>
-<li>文档非常全且细致。</li>
-<li>提供较为上层的框架，搞个深度学习的原型非常方便。</li>
-<li>更新很快，且基于Python，支持CPU、GPU运算。</li>
-<li>现在已经可以切换backend了，可以选择用<code>theano</code>还是用<code>tensorflow</code></li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>原理上理解还是建议动手去搭</li>
-<li>运行效率较低</li>
-<li>调试不易</li>
-<li>更新太快，Github上面的基于<code>Keras</code>的代码基本要根据最新的文档改一遍才能用。</li>
-</ul>
-<h2 id="Char-RNN-Using-Keras"><a href="#Char-RNN-Using-Keras" class="headerlink" title="Char-RNN Using Keras"></a>Char-RNN Using Keras</h2><p>由于是小试牛刀，所以直接从Github上面扒了一段Keras的char-RNN代码，修改一下，跑沙士比亚的剧本。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span><br><span class="line">Created on Sat May 21 14:34:08 2016</span><br><span class="line"></span><br><span class="line">@author: yangsicong</span><br><span class="line">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> keras.layers.core <span class="keyword">import</span> Dense, Activation, Dropout, TimeDistributedDense</span><br><span class="line"><span class="keyword">from</span> keras.layers.recurrent <span class="keyword">import</span> LSTM</span><br><span class="line"></span><br><span class="line">text = open(<span class="string">'./input.txt'</span>, <span class="string">'r'</span>).read()</span><br><span class="line">char_to_idx = &#123; ch: i <span class="keyword">for</span> (i, ch) <span class="keyword">in</span> enumerate(sorted(list(set(text)))) &#125;</span><br><span class="line">idx_to_char = &#123; i: ch <span class="keyword">for</span> (ch, i) <span class="keyword">in</span> char_to_idx.items() &#125;</span><br><span class="line">vocab_size = len(char_to_idx)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'Working on %d characters (%d unique)'</span> % (len(text), vocab_size))</span><br><span class="line"></span><br><span class="line">SEQ_LENGTH = <span class="number">64</span></span><br><span class="line">BATCH_SIZE = <span class="number">16</span></span><br><span class="line">BATCH_CHARS = len(text) / BATCH_SIZE</span><br><span class="line">LSTM_SIZE = <span class="number">512</span></span><br><span class="line">LAYERS = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_batches</span><span class="params">(text)</span>:</span></span><br><span class="line">    T = np.asarray([char_to_idx[c] <span class="keyword">for</span> c <span class="keyword">in</span> text], dtype=np.int32)</span><br><span class="line">    X = np.zeros((BATCH_SIZE, SEQ_LENGTH, vocab_size))</span><br><span class="line">    Y = np.zeros((BATCH_SIZE, SEQ_LENGTH, vocab_size))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, BATCH_CHARS - SEQ_LENGTH - <span class="number">1</span>, SEQ_LENGTH):</span><br><span class="line">        X[:] = <span class="number">0</span></span><br><span class="line">        Y[:] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> batch_idx <span class="keyword">in</span> range(BATCH_SIZE):</span><br><span class="line">            start = batch_idx * BATCH_CHARS + i</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(SEQ_LENGTH):</span><br><span class="line">                X[batch_idx, j, T[start+j]] = <span class="number">1</span></span><br><span class="line">                Y[batch_idx, j, T[start+j+<span class="number">1</span>]] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">yield</span> X, Y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_model</span><span class="params">(batch_size, seq_len)</span>:</span></span><br><span class="line">    model = Sequential()</span><br><span class="line">    model.add(LSTM(LSTM_SIZE, return_sequences=<span class="keyword">True</span>, batch_input_shape=(batch_size, seq_len, vocab_size), stateful=<span class="keyword">True</span>))</span><br><span class="line">    model.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> range(LAYERS - <span class="number">1</span>):</span><br><span class="line">        model.add(LSTM(LSTM_SIZE, return_sequences=<span class="keyword">True</span>, stateful=<span class="keyword">True</span>))</span><br><span class="line">        model.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line"></span><br><span class="line">    model.add(TimeDistributedDense(vocab_size))</span><br><span class="line">    model.add(Activation(<span class="string">'softmax'</span>))</span><br><span class="line">    model.compile(loss=<span class="string">'categorical_crossentropy'</span>, optimizer=<span class="string">'adagrad'</span>)</span><br><span class="line">    <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">'Building model.'</span></span><br><span class="line">test_model = build_model(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">training_model = build_model(BATCH_SIZE, SEQ_LENGTH)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'... done'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample</span><span class="params">(epoch, sample_chars=<span class="number">256</span>)</span>:</span></span><br><span class="line">    test_model.reset_states()</span><br><span class="line">    test_model.load_weights(<span class="string">'./tmp/keras_char_rnn.%d.h5'</span> % epoch)</span><br><span class="line">    header = <span class="string">'LSTM based '</span></span><br><span class="line">    sampled = [char_to_idx[c] <span class="keyword">for</span> c <span class="keyword">in</span> header]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> header:</span><br><span class="line">        batch = np.zeros((<span class="number">1</span>, <span class="number">1</span>, vocab_size))</span><br><span class="line">        batch[<span class="number">0</span>, <span class="number">0</span>, char_to_idx[c]] = <span class="number">1</span></span><br><span class="line">        test_model.predict_on_batch(batch)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(sample_chars):</span><br><span class="line">        batch = np.zeros((<span class="number">1</span>, <span class="number">1</span>, vocab_size))</span><br><span class="line">        batch[<span class="number">0</span>, <span class="number">0</span>, sampled[<span class="number">-1</span>]] = <span class="number">1</span></span><br><span class="line">        softmax = test_model.predict_on_batch(batch)[<span class="number">0</span>].ravel()</span><br><span class="line">        sample = np.random.choice(range(vocab_size), p=softmax)</span><br><span class="line">        sampled.append(sample)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> <span class="string">''</span>.join([idx_to_char[c] <span class="keyword">for</span> c <span class="keyword">in</span> sampled])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> i, (x, y) <span class="keyword">in</span> enumerate(read_batches(text)):</span><br><span class="line">        loss = training_model.train_on_batch(x, y)</span><br><span class="line">        <span class="keyword">print</span> epoch, i, loss</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">            training_model.save_weights(<span class="string">'./tmp/keras_char_rnn.%d.h5'</span> % epoch, overwrite=<span class="keyword">True</span>)</span><br><span class="line">            sample(epoch)</span><br></pre></td></tr></table></figure>
-<p>结果是我的小mba风扇呜呜直转，跑了两天多，RNN像一个小孩子从刚刚咿呀学语，到最后能出完整的单词和句子，简直不能神奇更多。</p>
-<pre><code>- epoch:0, batch:1000, loss:2.13260865211
-LSTM based fo?
-
-OUREOTIN:
-Why rom hames ane ttwe woe, wheu menerk.
-
-SeDIS:
-Ay, by shue le art feramt your of
-Thin hen a soating lener ti vis
-The to mime
-Bo  rinh. oliwhew of: she hiant,
-Anles woer deie hizh theew on wore,
-The te dwyialt im sishor&apos; va.
-
-- epoch:40, batch:1000, loss:1.24812698364
-LSTM based sight:
-This splits agurated with your cheek to wor,
-Even and more perjection of thy life,
-You should not visit such aljufper&apos;d up:
-And you will did my deft, to know the bases:
-Our sweet Worwing thrafts to such convey&apos;d his
-own&apos;s boar weakness. Take i
-
-- epoch:99, batch:1000, loss:1.11117362976
-LSTM based Norfaxen!
-
-GREMIO:
-Fight, they know it.
-
-CATESBY:
-My Lord of York, here he not appear&apos;d toice.
-
-Widow:
-Fetch them well: is thy son was from me all:
-Were my behind the earth rabes through himself.
-
-PROSPERO:
-I will confess him with your infroch
-</code></pre><h2 id="扯些闲篇"><a href="#扯些闲篇" class="headerlink" title="扯些闲篇"></a>扯些闲篇</h2><p>用char-RNN学习写汉字的一篇<a href="http://www.tuicool.com/articles/FveIN3A" target="_blank" rel="external">文章</a>。</p>
-<p>以及黑镜第三季中有一集可以学习男友的通信及聊天记录，可以模拟男友与自己聊天，栩栩如生。如今看来完全可以用RNN来进行训练。</p>
-
+<li>
+          
       
     </div>
     
@@ -382,9 +303,13 @@ I will confess him with your infroch
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RNN-Keras/">RNN; Keras</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keras/">Keras</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RNN/">RNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/2016/05/18/rnn-intuition-practice/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -429,16 +354,16 @@ I will confess him with your infroch
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
+              <p>不能免俗必然是Hello World！那就简单分享一下是如何利用Hexo和Github建站的吧。总共分三步：</p>
+<ol>
+<li>安装node.js及git</li>
+<li>安装hexo</li>
+<li>Github创建pages页面并部署</li>
+<li>图床及其他插件配置</li>
+</ol>
+<ul>
+<li>
+          
       
     </div>
     
@@ -447,6 +372,10 @@ I will confess him with your infroch
       
 
       
+      
+        <p class="article-more-link">
+          <a href="/2016/05/16/hello-world/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -471,17 +400,17 @@ I will confess him with your infroch
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016 John Doe
+                2016 Sicong Yang
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >Site Visitors: 
+                        <span id="site-visit" >本站到访数: 
                             <span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
@@ -491,7 +420,7 @@ I will confess him with your infroch
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">Page Hits: 
+                        <span id="page-visit">本页阅读量: 
                             <span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
@@ -524,9 +453,9 @@ I will confess him with your infroch
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" title="Comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
