@@ -24,7 +24,7 @@
 <meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/14645287824259.jpg">
 <meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/14645288838283.jpg">
 <meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/char-rnn-intu.jpg">
-<meta property="og:updated_time" content="2016-06-04T15:40:21.000Z">
+<meta property="og:updated_time" content="2016-06-15T15:23:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RNN的理解与实践">
 <meta name="twitter:description" content="RNN的理解与实践对于RNN和CNN的区别，最感性的认识就是CNN适用于做网格计算，所以经常被应用于图像处理的问题；而RNN更适用于处理序列，所以经常被应用于文本的处理。而对RNN的兴趣源于寒小阳&amp;amp;龙心尘的一篇博文，可以利用神经网络模仿人类写作，可以跑出来具有小四风格的文章段落。正好有师妹推荐了新晋机器学习Python神库Keras，那就理论加实践一起认识一下神奇的循环神经网络吧。">
@@ -186,7 +186,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreOS/">CoreOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vagrant/">Vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
                     </div>
                 </section>
                 
@@ -300,10 +300,7 @@
       
           
         <h1 id="RNN的理解与实践"><a href="#RNN的理解与实践" class="headerlink" title="RNN的理解与实践"></a>RNN的理解与实践</h1><p>对于RNN和CNN的区别，最感性的认识就是CNN适用于做网格计算，所以经常被应用于图像处理的问题；而RNN更适用于处理序列，所以经常被应用于文本的处理。而对RNN的兴趣源于寒小阳&amp;龙心尘的一篇<a href="http://blog.csdn.net/han_xiaoyang/article/details/51253274" target="_blank" rel="external">博文</a>，可以利用神经网络模仿人类写作，可以跑出来具有小四风格的文章段落。正好有师妹推荐了新晋机器学习Python神库Keras，那就理论加实践一起认识一下神奇的循环神经网络吧。</p>
-<ul>
-<li><a id="more"></a>
-</li>
-</ul>
+<a id="more"></a>
 <h2 id="RNN结构及原理浅析"><a href="#RNN结构及原理浅析" class="headerlink" title="RNN结构及原理浅析"></a>RNN结构及原理浅析</h2><p>首先，需要说明的是，RNN依然是一个神经网络，其基本结构与普通的神经网络基本一致，如下图所示<a href="http://www.cnblogs.com/neopenx/p/4623328.html" target="_blank" rel="external">Ref</a>：</p>
 <img title="RNN神经网络结构图" alt="RNN神经网络结构图" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/14645287824259.jpg">
 <p>但所不同的是，传统的神经网络（包括CNN）假定所有输入和输出都是相互独立的。而RNN的基本假设是输入序列之间是存在相互影响的。RNN之所以被称为循环，就是它会按照序列的输入时间不断重复训练该网络，并利用后向传播算法不断迭代更新权重$(U, V, W)$，这也就是为什么可以将RNN一层网络“展开”为$n$层，而$n$是序列输入的长度，也是时间总步长。同时，不难理解为什么一个RNN层“展开”的结点都共用一套参数。这里的“展开”是虚拟的。</p>
@@ -395,7 +392,7 @@ I will confess him with your infroch
         <p><span>本文标题:</span><a href="/2016/05/18/rnn-intuition-practice/">RNN的理解与实践</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Sicong Yang</a></p>
         <p><span>发布时间:</span>2016-05-18, 23:31:10</p>
-        <p><span>最后更新:</span>2016-06-04, 23:40:21</p>
+        <p><span>最后更新:</span>2016-06-15, 23:23:05</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/05/18/rnn-intuition-practice/" title="RNN的理解与实践">http://jaybeka.github.io/2016/05/18/rnn-intuition-practice/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jaybeka.github.io/2016/05/18/rnn-intuition-practice/　　作者: Sicong Yang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -409,6 +406,12 @@ I will confess him with your infroch
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/06/15/build-coreos-clusters-with-vagrant/">
+                    利用Vagrant搭建虚拟CoreOS集群
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -501,7 +504,9 @@ I will confess him with your infroch
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2016/06/15/build-coreos-clusters-with-vagrant/" title="上一篇: 利用Vagrant搭建虚拟CoreOS集群">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -513,7 +518,7 @@ I will confess him with your infroch
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/05/18/rnn-intuition-practice/">RNN的理解与实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/hello-world/">Hello World</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/15/build-coreos-clusters-with-vagrant/">利用Vagrant搭建虚拟CoreOS集群</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/18/rnn-intuition-practice/">RNN的理解与实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/hello-world/">Hello World</a></li></ul>
 
 
 

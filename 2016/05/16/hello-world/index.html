@@ -31,7 +31,7 @@ Github创建pages页面并部署
 安装hexo
 Github创建pages页面并部署
 图床及其他插件配置">
-<meta property="og:updated_time" content="2016-06-04T15:42:32.000Z">
+<meta property="og:updated_time" content="2016-06-15T15:22:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello World">
 <meta name="twitter:description" content="不能免俗必然是Hello World！那就简单分享一下是如何利用Hexo和Github建站的吧。总共分三步：
@@ -197,7 +197,7 @@ Github创建pages页面并部署
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreOS/">CoreOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vagrant/">Vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
                     </div>
                 </section>
                 
@@ -313,10 +313,7 @@ Github创建pages页面并部署
 <li>Github创建pages页面并部署</li>
 <li>图床及其他插件配置</li>
 </ol>
-<ul>
-<li><a id="more"></a>
-</li>
-</ul>
+<a id="more"></a>
 <h2 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h2><p>直接去<a href="https://nodejs.org/en/download/" target="_blank" rel="external">官网</a>下载相应的安装包就好了。这里我下载的Mac OS X Installer (.pkg)。</p>
 <p>Mac OS X自带Git……</p>
 <h2 id="安装hexo并配置"><a href="#安装hexo并配置" class="headerlink" title="安装hexo并配置"></a>安装hexo并配置</h2><h3 id="安装Hexo并初始化"><a href="#安装Hexo并初始化" class="headerlink" title="安装Hexo并初始化"></a>安装Hexo并初始化</h3><p>在终端输入如下命令安装Hexo：</p>
@@ -346,9 +343,12 @@ Github创建pages页面并部署
 <p>并且Hexo有七牛的图片<a href="https://github.com/gyk001/hexo-qiniu-sync" target="_blank" rel="external">上传插件</a>。</p>
 <p>但是我手贱将缓存地址设成了华北，<a href="https://support.qiniu.com/hc/kb/article/112954/" target="_blank" rel="external">上传地址变了</a>，于是在同步的过程中会提示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; code: 400,</span><br><span class="line">  error: &apos;incorrect zone, please use up-z1.qiniu.com&apos; &#125;</span><br></pre></td></tr></table></figure>
-<p>但我看了一下无论是<a href="http://developer.qiniu.com/code/v6/sdk/nodejs.html" target="_blank" rel="external">官方文档</a>还是<a href="https://github.com/gyk001/hexo-qiniu-sync" target="_blank" rel="external">上传插件</a>中都没有提及如何修改该项配置，我只能将Hexo根目录下<code>node_modules/hexo-qiniu-sync/qiniu</code>下的<code>conf.js</code>中的改了一下上传地址，问题就解决了。</p>
+<p><del>但我看了一下无论是<a href="http://developer.qiniu.com/code/v6/sdk/nodejs.html" target="_blank" rel="external">官方文档</a>还是<a href="https://github.com/gyk001/hexo-qiniu-sync" target="_blank" rel="external">上传插件</a>中都没有提及如何修改该项配置，我只能将Hexo根目录下<code>node_modules/hexo-qiniu-sync/qiniu</code>下的<code>conf.js</code>中的改了一下上传地址，问题就解决了。</del></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//exports.UP_HOST = 'http://upload.qiniu.com';</span></span><br><span class="line">exports.UP_HOST = <span class="string">'http://up-z1.qiniu.com'</span>;</span><br></pre></td></tr></table></figure>
-<p>已给该插件的作者提了一个<a href="https://github.com/gyk001/hexo-qiniu-sync/issues/33" target="_blank" rel="external">issue</a>。</p>
+<p>已给该插件的作者提了一个<a href="https://github.com/gyk001/hexo-qiniu-sync/issues/33" target="_blank" rel="external">issue</a>。该issue已被关闭，更新到最新的版本并在<code>_config.yml</code>中添加一行配置就可以了，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qiniu:</span><br><span class="line">  up_host: http://up-z1.qiniu.com</span><br></pre></td></tr></table></figure>
+<p>原来七牛同步工具是支持修改上传地址的配置的，插件作者就在<a href="https://github.com/gyk001/hexo-qiniu-sync/commit/8131eb82e3c4202d7eccd3f3daa7c617b318539c" target="_blank" rel="external"><code>sync.js</code></a>中修改了如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(config.up_host)&#123;</span><br><span class="line">    qiniu.conf.UP_HOST = config.up_host;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Mathjax"><a href="#Mathjax" class="headerlink" title="Mathjax"></a>Mathjax</h3><p>这么高科技的网站怎么可能少了mathjax，那样人生会不完整的。</p>
 <p>同样，贴心的前辈们已经给我们准备好了相应的插件。<a href="http://catx.me/2014/03/09/hexo-mathjax-plugin/" target="_blank" rel="external">安装hexo mathjax</a>。但该mathjax可能会遇到字符冲突问题，当在公式中出现两个_时程序会优先处理成斜体字，而不是公式中的下标。可参考<a href="http://lukang.me/2014/mathjax-for-hexo.html" target="_blank" rel="external">此篇文章</a>采用转义\跳过。</p>
 <p><em>不完全参考文章：</em></p>
@@ -369,7 +369,7 @@ Github创建pages页面并部署
         <p><span>本文标题:</span><a href="/2016/05/16/hello-world/">Hello World</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Sicong Yang</a></p>
         <p><span>发布时间:</span>2016-05-16, 21:49:19</p>
-        <p><span>最后更新:</span>2016-06-04, 23:42:32</p>
+        <p><span>最后更新:</span>2016-06-15, 23:22:38</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/05/16/hello-world/" title="Hello World">http://jaybeka.github.io/2016/05/16/hello-world/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jaybeka.github.io/2016/05/16/hello-world/　　作者: Sicong Yang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -487,7 +487,7 @@ Github创建pages页面并部署
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/05/18/rnn-intuition-practice/">RNN的理解与实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/hello-world/">Hello World</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/15/build-coreos-clusters-with-vagrant/">利用Vagrant搭建虚拟CoreOS集群</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/18/rnn-intuition-practice/">RNN的理解与实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/hello-world/">Hello World</a></li></ul>
 
 
 

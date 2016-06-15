@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Sicong Yang" />
+
+
+
+<meta name="description" content="本文是为Kubernetes搭建虚拟集群第一步，利用Vagrant搭建虚拟的CoreOS集群，环境是Windows 10 + VirtualBox。Kubernetes是Google开源的容器集群管理系统，以后应该会有一系列围绕其展开的文章，因此这里就不再赘述。
+简介Vagrant是什么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用Vagrant搭建虚拟CoreOS集群">
+<meta property="og:url" content="http://jaybeka.github.io/2016/06/15/build-coreos-clusters-with-vagrant/index.html">
+<meta property="og:site_name" content="Boom! Bang!">
+<meta property="og:description" content="本文是为Kubernetes搭建虚拟集群第一步，利用Vagrant搭建虚拟的CoreOS集群，环境是Windows 10 + VirtualBox。Kubernetes是Google开源的容器集群管理系统，以后应该会有一系列围绕其展开的文章，因此这里就不再赘述。
+简介Vagrant是什么">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/ram-with-4-coreos-vm.png">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/remote-connection-disconnect.png">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/vt-x-amd-v-problem.png">
+<meta property="og:updated_time" content="2016-06-15T15:18:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用Vagrant搭建虚拟CoreOS集群">
+<meta name="twitter:description" content="本文是为Kubernetes搭建虚拟集群第一步，利用Vagrant搭建虚拟的CoreOS集群，环境是Windows 10 + VirtualBox。Kubernetes是Google开源的容器集群管理系统，以后应该会有一系列围绕其展开的文章，因此这里就不再赘述。
+简介Vagrant是什么">
+<meta name="twitter:image" content="http://o86wlfaos.bkt.clouddn.com//images/ram-with-4-coreos-vm.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternative" href="/atom.xml" title="Boom! Bang!" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>利用Vagrant搭建虚拟CoreOS集群 | Boom! Bang!</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+</head>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Sicong Yang</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Pull the triger! Make it happen!</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreOS/">CoreOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vagrant/">Vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Sicong Yang</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Sicong Yang</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Pull the triger! Make it happen!</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-build-coreos-clusters-with-vagrant" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/15/build-coreos-clusters-with-vagrant/" class="article-date">
+      <time datetime="2016-06-15T14:22:00.000Z" itemprop="datePublished">2016-06-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      利用Vagrant搭建虚拟CoreOS集群
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CoreOS/">CoreOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vagrant/">Vagrant</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>本文是为<a href="http://kubernetes.io/" target="_blank" rel="external">Kubernetes</a>搭建虚拟集群第一步，利用Vagrant搭建虚拟的CoreOS集群，环境是Windows 10 + VirtualBox。<br>Kubernetes是Google开源的容器集群管理系统，以后应该会有一系列围绕其展开的文章，因此这里就不再赘述。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="Vagrant是什么"><a href="#Vagrant是什么" class="headerlink" title="Vagrant是什么"></a><a href="http://www.ituring.com.cn/article/131600" target="_blank" rel="external">Vagrant是什么</a></h3><a id="more"></a>
+<blockquote>
+<p>Vagrant是构建在虚拟化技术之上的虚拟机运行环境管理工具。通过Vagrant可以方便实现的对虚拟机的管理，包括建立和删除虚拟机、配置虚拟机运行参数、管理虚拟机运行状态、自动化配置和安装开发环境必须的各类软件、打包和分发虚拟机运行环境等。</p>
+</blockquote>
+<h3 id="为什么要使用Vagrant"><a href="#为什么要使用Vagrant" class="headerlink" title="为什么要使用Vagrant"></a>为什么要使用Vagrant</h3><blockquote>
+<p><a href="http://www.ituring.com.cn/article/131600" target="_blank" rel="external">http://www.ituring.com.cn/article/131600</a></p>
+<ol>
+<li>尽可能避免”Work on my machine“错误</li>
+<li>缩短搭建开发环境的时间</li>
+</ol>
+<p><a href="https://www.vagrantup.com/docs/why-vagrant/" target="_blank" rel="external">https://www.vagrantup.com/docs/why-vagrant/</a></p>
+<ol>
+<li>Vagrant能让开发者统一生产和运行环境；让运维人员快速部署在不同的虚拟环境或者公有云上，并保证开发和测试环境一致；让设计人员专注于设计，而不必考虑软件系统环境等其他问题。</li>
+</ol>
+</blockquote>
+<h3 id="为什么要使用CoreOS"><a href="#为什么要使用CoreOS" class="headerlink" title="为什么要使用CoreOS"></a>为什么要使用CoreOS</h3><p>因为我们要管理和操作服务器机群，所以每台机器上得安装一个服务器操作系统。 目前世界上唯一的“服务器Linux操作系统”是CoreOS。其他诸如CentOS等“号称” 服务器操作系统的，其实都是桌面系统。只有桌面系统才需要package management system，例如 apt 和 yum。因为桌面系统只有一个或者少数几个人 用，大家能预期需要在上面安装什么软件，而packages是这些软件或者其依赖的 组建。在一个机群上，分布式操作系统（例如Kubernetes）有可能把任何一个用 户的任何一个作业调度到一台机器上。有的作业需要Python 2.4，有的需要 Python 3，有的需要Java 8，有的需要OpenCV。要在所有机器都预先安装好这些 依赖，几乎是不可能的。一个“真的”服务器操作系统，只需要能运行containers， 每个container里面包含需要的所有依赖。CoreOS就是这样一个操作系统。未来也会专门讲讲CoreOS操作系统。</p>
+<p><strong>参考资料</strong>：</p>
+<ul>
+<li>Vagrant官方文档：<a href="https://www.vagrantup.com/docs/" target="_blank" rel="external">https://www.vagrantup.com/docs/</a></li>
+<li>k8sp/vagrant：<a href="https://github.com/k8sp/vagrant/blob/master/what_is_vagrant.md" target="_blank" rel="external">https://github.com/k8sp/vagrant/blob/master/what_is_vagrant.md</a></li>
+<li>使用Vagrant（零）——为什么要使用Vagrant：<a href="http://www.ituring.com.cn/article/131600" target="_blank" rel="external">http://www.ituring.com.cn/article/131600</a></li>
+<li>Vagrant使用简介：<a href="http://xuclv.blog.51cto.com/5503169/1239250" target="_blank" rel="external">http://xuclv.blog.51cto.com/5503169/1239250</a></li>
+<li>CoreOS官方文档：<a href="https://coreos.com/os/docs/latest/" target="_blank" rel="external">https://coreos.com/os/docs/latest/</a></li>
+</ul>
+<p><em>在widnows环境下建议使用Git Bash模拟Linux环境。</em></p>
+<h2 id="安装单台机器CoreOS"><a href="#安装单台机器CoreOS" class="headerlink" title="安装单台机器CoreOS"></a>安装单台机器CoreOS</h2><ol>
+<li>安装VirtualBox</li>
+<li>安装Vagrant</li>
+<li>下载box文件（虚拟镜像）到本地磁盘中</li>
+</ol>
+<p>进入命令行窗口输入</p>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ vagrant init</span><br><span class="line">$ mkdir username</span><br><span class="line">$ mv /dir/coreos_production_vagrant.box username</span><br><span class="line">$ vagrant add username file:///e:/path/	$ coreos_production_vagrant.box</span><br></pre></td></tr></table></figure>
+</code></pre><p>修改Vagrantfile配置</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vagrant.configure(&quot;2&quot;) do |config|</span><br><span class="line">  config.vm.box = &quot;username&quot;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+</code></pre><p>启动虚拟机并连接</p>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vagrant up</span><br><span class="line">$ vagrant ssh</span><br></pre></td></tr></table></figure>
+</code></pre><h2 id="安装CoreOS集群"><a href="#安装CoreOS集群" class="headerlink" title="安装CoreOS集群"></a>安装CoreOS集群</h2><p>本节摘自<a href="https://www.gitbook.com/book/yeasy/docker_practice" target="_blank" rel="external">《Docker——从入门到实践》</a>的<a href="https://yeasy.gitbooks.io/docker_practice/content/coreos/quickstart.html" target="_blank" rel="external">快速搭建CoreOS集群</a>一节。</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>从CoreOS官方代码库获取基本配置，并进行修改</p>
+<p>首先，获取模板配置文件</p>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/coreos/coreos-vagrant</span><br><span class="line">$ <span class="built_in">cd</span> coreos-vagrant</span><br><span class="line">$ cp user-data.sample user-data</span><br></pre></td></tr></table></figure>
+</code></pre><p>获取新的token</p>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl https://discovery.etcd.io/new</span><br></pre></td></tr></table></figure>
+</code></pre><p>把获取的token放到user-data文件中，示例如下：</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">coreos:</span><br><span class="line">  etcd:</span><br><span class="line">    discovery: https://discovery.etcd.io/&lt;token&gt;</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>默认情况下，CoreOS Vagrantfile 将会启动单机。</p>
+<p>我们需要复制并修改<code>config.rb.sample</code>文件.</p>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vcp config.rb.sample config.rb</span><br></pre></td></tr></table></figure>
+</code></pre><p>修改集群配置参数<code>num_instances</code>为3。</p>
+<p>启动集群</p>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ vagrant up</span><br><span class="line">=&gt;</span><br><span class="line">Bringing machine <span class="string">'core-01'</span> up with <span class="string">'virtualbox'</span> provider...</span><br><span class="line">Bringing machine <span class="string">'core-02'</span> up with <span class="string">'virtualbox'</span> provider...</span><br><span class="line">Bringing machine <span class="string">'core-03'</span> up with <span class="string">'virtualbox'</span> provider...</span><br><span class="line">==&gt; core-01: Box <span class="string">'coreos-alpha'</span> could not be found. Attempting to find and install...</span><br><span class="line">    core-01: Box Provider: virtualbox</span><br><span class="line">    core-01: Box Version: &gt;= 0</span><br></pre></td></tr></table></figure>
+</code></pre><p>在启动集群的时候，Vagrant会自动从网上去下载box文件，从命令行下载，又生在天朝，所以又慢又不稳定。所以干脆可以用下载工具获取最新版本的<code>coreos_production_vagrant.box</code>到本地，并修改<code>Vagrantfile</code>中<code>config.vm.box_url</code>。在该文件中，设置了两处下载URL，分别针对的VirtualBox和VMware。可以都改了，或者只改本机使用的虚拟机软件对应使用的配置。</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vagrant.configure(&quot;2&quot;) do |config|</span><br><span class="line">	config.vm.box_url = &quot;file:///d:/path/coreos_production_vagrant.box&quot;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+</code></pre><p>添加ssh的公匙</p>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-add ~/.vagrant.d/insecure_private_key</span><br></pre></td></tr></table></figure>
+</code></pre><p>连接集群中的第一台机器</p>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vagrant ssh core-01 -- -A</span><br></pre></td></tr></table></figure>
+</code></pre><p>使用fleet命令查看集群运行状况</p>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ fleetctl list-machines</span><br><span class="line">MACHINE         IP              METADATA</span><br><span class="line">5a332144...     172.17.8.103    -</span><br><span class="line">b2d2f900...     172.17.8.101    -</span><br><span class="line">cee54191...     172.17.8.102    -</span><br></pre></td></tr></table></figure>
+</code></pre><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>如果按照目前这个样子来讲，如果只是搭建一个可以撒欢的Playground环境的话，花的时间最长的应该是在下载安装文件和box文件上面了，基本不需要怎么配置，很容易上手。性能上来讲，开了四个CoreOS的虚拟机，i5+8G内存还有富余，CoreOS果然很基本。</p>
+<img title="性能截图" alt="Windows性能截图" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/ram-with-4-coreos-vm.png">
+<h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">default: Waring: Remote connection disconnect. Retrying...</span><br></pre></td></tr></table></figure>
+<p>如图所示：</p>
+<img title="Waring" alt="Waring" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/remote-connection-disconnect.png">
+<p>本身只是警告是没问题的，因为虚拟机正在启动的过程之中。但如果直到连接超时，就说明有可能虚拟机没有起来。可以在GUI中查看虚拟机状态，一般是因为虚拟化功能没有开启的原因。</p>
+<p>对于Windows平台，VirtualBox会报：VT-x/AMD-V硬件加速在您的系统中不可用。如下图所示，</p>
+<img title="硬件加速不可用" alt="报错：VT-x/AMD-V硬件加速在您的系统中不可用" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/vt-x-amd-v-problem.png">
+<p>可能的原因是，参考这篇<a href="http://blog.csdn.net/u012990532/article/details/51285338" target="_blank" rel="external">博客</a>：</p>
+<ol>
+<li>CPU支持虚拟化技术，主流CPU都支持虚拟化技术，包括Intel Core i3/i5/i7以及AMD ；</li>
+<li>在BIOS中启用虚拟化功能；它有许多名称，例如对于AMD称为Secure Virtual Machine Mode, Intel称为Virtualization Technology，<a href="http://www.thinkalso.com/how-to-enable-intel-vt-x-and-amd-v/" target="_blank" rel="external">How to enable Intel vt-x and amd-v in BIOS (Intel i7 quad core, i5 &amp; i3)</a>；</li>
+<li>Hyper-V没有被安装；当Hyper-V被安装时，VirtualBox的VT-x/AMD-V支持被关闭，当Hyper-V被卸载后，VT-x/AMD-V重新启用；</li>
+</ol>
+<p>应尽量避免在虚拟机中安装虚拟机，理论是可以在虚拟机中使用虚拟化功能从而在虚拟机中跑虚拟机的。</p>
+<blockquote>
+<p>You CAN run Virtualization inside virtualization.<br>What you can’t do is use Virtualization Extensions (AMD-V, VT-X)<br>inside a virtualized server.</p>
+</blockquote>
+<p>但是问题在于即便硬件支持extensions，virtualbox不会把这些extensions传递给虚拟机，所以虚拟机里就失去这些extensions了。这样一来，如果嵌套虚拟机需要这些extensions，比如如果嵌套虚拟机跑kvm，那么就可能会出问题。在VirtualBox的论坛上有关于这个问题的<a href="https://forums.virtualbox.org/viewtopic.php?f=1&amp;t=20589" target="_blank" rel="external">讨论</a>。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/06/15/build-coreos-clusters-with-vagrant/">利用Vagrant搭建虚拟CoreOS集群</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Sicong Yang</a></p>
+        <p><span>发布时间:</span>2016-06-15, 22:22:00</p>
+        <p><span>最后更新:</span>2016-06-15, 23:18:52</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/06/15/build-coreos-clusters-with-vagrant/" title="利用Vagrant搭建虚拟CoreOS集群">http://jaybeka.github.io/2016/06/15/build-coreos-clusters-with-vagrant/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jaybeka.github.io/2016/06/15/build-coreos-clusters-with-vagrant/　　作者: Sicong Yang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/05/18/rnn-intuition-practice/">
+                    RNN的理解与实践
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vagrant是什么"><span class="toc-number">1.1.</span> <span class="toc-text">Vagrant是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么要使用Vagrant"><span class="toc-number">1.2.</span> <span class="toc-text">为什么要使用Vagrant</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么要使用CoreOS"><span class="toc-number">1.3.</span> <span class="toc-text">为什么要使用CoreOS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装单台机器CoreOS"><span class="toc-number">2.</span> <span class="toc-text">安装单台机器CoreOS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装CoreOS集群"><span class="toc-number">3.</span> <span class="toc-text">安装CoreOS集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">3.1.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动"><span class="toc-number">3.2.</span> <span class="toc-text">启动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">4.</span> <span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#坑"><span class="toc-number">5.</span> <span class="toc-text">坑</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"利用Vagrant搭建虚拟CoreOS集群　| Boom! Bang!　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/05/18/rnn-intuition-practice/" title="下一篇: RNN的理解与实践">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/15/build-coreos-clusters-with-vagrant/">利用Vagrant搭建虚拟CoreOS集群</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/18/rnn-intuition-practice/">RNN的理解与实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Sicong Yang
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
