@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Sicong Yang" />
+
+
+
+<meta name="description" content="Word2Vec学习笔记Word2Vec是Google开源的一款用于计算词向量的工具，它可以对海量的词典和数据集上进行高效的训练，并得到稠密连续的词向量作为其他自然语言处理任务的基础。Word2Vec并不是一种算法，而是基于NLPM的高效实现，包含了CBoW和Skip-gram两个模型。本文将介绍统计语言模型中词向量的Discrete和Distributed Representation之间的区别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Word2Vec学习笔记">
+<meta property="og:url" content="http://jaybeka.github.io/2016/07/31/word2vec-notes/index.html">
+<meta property="og:site_name" content="Boom! Bang!">
+<meta property="og:description" content="Word2Vec学习笔记Word2Vec是Google开源的一款用于计算词向量的工具，它可以对海量的词典和数据集上进行高效的训练，并得到稠密连续的词向量作为其他自然语言处理任务的基础。Word2Vec并不是一种算法，而是基于NLPM的高效实现，包含了CBoW和Skip-gram两个模型。本文将介绍统计语言模型中词向量的Discrete和Distributed Representation之间的区别">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/nplm.png">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/cbow.png">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/skip-gram.png">
+<meta property="og:updated_time" content="2016-07-31T13:46:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Word2Vec学习笔记">
+<meta name="twitter:description" content="Word2Vec学习笔记Word2Vec是Google开源的一款用于计算词向量的工具，它可以对海量的词典和数据集上进行高效的训练，并得到稠密连续的词向量作为其他自然语言处理任务的基础。Word2Vec并不是一种算法，而是基于NLPM的高效实现，包含了CBoW和Skip-gram两个模型。本文将介绍统计语言模型中词向量的Discrete和Distributed Representation之间的区别">
+<meta name="twitter:image" content="http://o86wlfaos.bkt.clouddn.com//images/nplm.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternative" href="/atom.xml" title="Boom! Bang!" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Word2Vec学习笔记 | Boom! Bang!</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+</head>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Sicong Yang</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Pull the triger! Make it happen!</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreOS/">CoreOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coursera/">Coursera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deployment/">Deployment</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Natural-Language-Processing/">Natural Language Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vagrant/">Vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-1/">Week 1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/word2vec/">word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Instereted in Machine Learning, Data Analysis and other related fields.</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Sicong Yang</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Sicong Yang</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Pull the triger! Make it happen!</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+</nav>
+      <div class="body-wrap"><article id="post-word2vec-notes" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/31/word2vec-notes/" class="article-date">
+      <time datetime="2016-07-31T13:19:33.000Z" itemprop="datePublished">2016-07-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Word2Vec学习笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Natural-Language-Processing/">Natural Language Processing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/word2vec/">word2vec</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Word2Vec学习笔记"><a href="#Word2Vec学习笔记" class="headerlink" title="Word2Vec学习笔记"></a>Word2Vec学习笔记</h1><p>Word2Vec是Google开源的一款用于计算词向量的工具，它可以对海量的词典和数据集上进行高效的训练，并得到稠密连续的词向量作为其他自然语言处理任务的基础。Word2Vec并不是一种算法，而是基于NLPM的高效实现，包含了CBoW和Skip-gram两个模型。本文将介绍统计语言模型中词向量的Discrete和Distributed Representation之间的区别，Word2Vec的模型一些细节。欢迎补充、指正并参与讨论。</p>
+<a id="more"></a>
+<h2 id="统计语言模型（Statistical-Language-Model）"><a href="#统计语言模型（Statistical-Language-Model）" class="headerlink" title="统计语言模型（Statistical Language Model）"></a>统计语言模型（Statistical Language Model）</h2><p>在自然语言处理中的一个基本的问题就是：如何计算一段文本序列$S$，在文本中出现的概率。这样，我们可以根据概率来选择更靠谱的翻译结果和AI回答。</p>
+<p>首先要将句子$S$表示一连串特定顺序排列的文本原子单位，在一些场景中，可能按字符(character)或者短语(phrase)为单位进行处理。但最常见的还是以词为单位，将句子$S$用$w_1,w_2,…,w_T$词序列表示，即分词任务。假设，当前词的概率可以表示为基于它前面出现的词的条件概率，那么文本序列$S=w_1,w_2,…,w_T$的概率$P(S)$可以表示为：</p>
+<p>$$P(S)=P(w_1,w_2,…,w_T)=\prod_{t=1}^T{p(w_t|w_1,w_2,…,w_{t-1})}$$</p>
+<p>可以预见，这样没办法去估计一个词出现的概率，因为参数空间太大。在实际中，一般采用N-gram模型去近似地表示，即当前词只与前面$N-1$个词有关。</p>
+<p>$$p(w_t|w_1,w_2,…,w_{t-1}) \approx p(w_t|w_{t-n+1},…,w_{t-1})$$</p>
+<p>通常使用bi-gram ($N=2$)和tri-gram ($N=3$)。但是模型的预测精度有限，且存在零概率问题，即一段从未在训练集中出现过的Ngram片段会使得整个序列的概率为0。有一些N-gram模型的变体（例如，back-off trigram和interpolated trigram模型）针对性地解决这些问题，但有一个前序问题是：如何来表示这些词呢？对，是<strong>向量</strong>。</p>
+<h3 id="Discrete-Representation"><a href="#Discrete-Representation" class="headerlink" title="Discrete Representation"></a>Discrete Representation</h3><p>在传统的模型中，每个词都被表示为离散的向量，常见的编码方式就是One-hot encoding。即以0-1向量来表示一个词，维度就是整个词典的数量，词向量在其对应的维度为1，其他均为零。如：</p>
+<ul>
+<li>I:    [ 1 0 0 0 0 ]</li>
+<li>love: [ 0 1 0 0 0 ]</li>
+<li>mom:  [ 0 0 1 0 0 ]</li>
+<li>and:  [ 0 0 0 1 0 ]</li>
+<li>dad:  [ 0 0 0 0 1 ]</li>
+</ul>
+<p>这种表示方法的缺陷显而易见：</p>
+<ul>
+<li>割裂了词与词之间的相似度的关系，如上文中mom和dad都是我的双亲，却无法在词向量上体现。</li>
+<li>造成了维度灾难问题（the curse of dimensionality），通常词典中的词都是百万数量级的，采用One-hot编码会造成超高维超稀疏的矩阵，给计算带来了很多麻烦的问题。</li>
+</ul>
+<h3 id="Distributed-Representation"><a href="#Distributed-Representation" class="headerlink" title="Distributed Representation"></a>Distributed Representation</h3><p>为了避免上述问题，我们倾向用低维稠密的向量来表示一个词，这样的表示方法被称为Distributed Representation。在信息检索（Information Retrieval）领域，这个概念又被称为向量空间模型（Vector Space Model）[1]。</p>
+<p>为了获取这样的连续稠密的向量，可以分为distributed和distributional两类方法，但都是基于<a href="https://en.wikipedia.org/wiki/Statistical_semantics" target="_blank" rel="external">statistical semantics distributional hypothesis</a>，核心思想就是词义隐含在上下文统计特征中。</p>
+<p>Distributional包括BoW、LSI、LDA等模型，统计单词共现的频率和次数，往往限定于只存在于相同的上下文环境中。通过构造PMI/PPMI矩阵，再通过SVD进行降维等操作。</p>
+<p>Distributed包括NPLM、LBL、Glove等模型。不仅仅是统计了单词出现的频率，而是通过学习使得单词具有一定出现的概率，不一定同时出现在相同的上下文环境中。有文章证明Distributed的方法通常表现更好。[2]</p>
+<h2 id="Neural-Probabilistic-Language-Model"><a href="#Neural-Probabilistic-Language-Model" class="headerlink" title="Neural Probabilistic Language Model"></a>Neural Probabilistic Language Model</h2><p>接下来，让我们回到对统计语言模型的讨论。鉴于Ngram等模型的不足，2003年，Bengio等人发表了一篇开创性的文章：A Neural Probabilistic Language Model[3]。在这篇文章里，他们总结出了一套用神经网络建立统计语言模型的框架，想利用深度学习的方法来解决自然语言处理问题。并首次提出了连续空间的word representation，也就是后来被称为word embedding的概念，从而奠定了包括word2vec在内后续研究word representation learning的基础。</p>
+<p>NPLM模型的基本思想可以概括如下：</p>
+<ul>
+<li>假定词表中的每一个word都对应着一个连续的特征向量；</li>
+<li>假定一个连续平滑的概率模型，输入一段词向量的序列，可以输出这段序列的联合概率；</li>
+<li>同时学习词向量的权重和概率模型里的参数。</li>
+</ul>
+<img title="NPLM结构图" alt="Neural Probabilistic Language Model" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/nplm.png">
+<p>我们可以将整个模型拆分成两部分加以理解：</p>
+<ol>
+<li>首先是一个线性的embedding层。它将输入的$N−1$个one-hot词向量，通过一个共享的$D×V$的矩阵$C$，映射为$N−1$个分布式的词向量（distributed vector）。其中，$V$是词典的大小，$D$是embedding向量的维度（一个先验参数）。$C$矩阵里存储了要学习的word vector。</li>
+<li>其次是一个简单的前向反馈神经网络$g$。它由一个tanh隐层和一个softmax输出层组成。通过将embedding层输出的$N−1$个词向量映射为一个长度为$V$的概率分布向量，从而对词典中的word在输入context下的条件概率做出预估：</li>
+</ol>
+<p>$$p(w_i|w_1,w_2,…,w_{t−1}) \approx f(w_i,w_{t−1},…,w_{t−n+1})=g(w_i,C(w_{t−n+1}),…,C(w_{t−1}))$$</p>
+<p>我们可以通过最小化一个cross-entropy的正则化损失函数来调整模型的参数$\theta$：</p>
+<p>$$L(\theta)=\frac{1}{T}\sum_t\log{f(w_t,w_{t−1},…,w_{t−n+1})}+R(\theta)$$</p>
+<p>其中，模型的参数$\theta$包括了embedding层矩阵$C$的元素，和前向反馈神经网络模型$g$里的权重。这是一个巨大的参数空间。不过，在用SGD学习更新模型的参数时，并不是所有的参数都需要调整（例如未在输入的context中出现的词对应的词向量）。</p>
+<p>不过NPLM只能处理定长的序列，Mikolov等人在这篇文章基础之上，提出Recurrent Neural Net Language Model[4]，即用循环神经网络代替原始模型中的前向反馈神经网络，并将embedding层和RNN中的隐藏层合并，从而解决了变长序列的问题。</p>
+<h2 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h2><p>NPLM比较严重的问题是训练太慢了。在百万量级的数据集(AP News Corpus)上，使用了40个CPU进行训练，NPLM耗时三周只运行了5个epoch，得到了一个比较靠谱的解。显然，对于现在动辄上千万甚至上亿的真实语料库，训练一个NPLM模型几乎是一个不可能完成的任务。因此，为了简化NPLM模型，Mikolov提出了CBoW和Skip-gram两个模型，CBoW全称是Continuious Bag of Words目的是用Context预测当前词，Skip-gram则是用当前词预测周围的Context。[5,6]</p>
+<h3 id="Continuious-Bag-of-Words"><a href="#Continuious-Bag-of-Words" class="headerlink" title="Continuious Bag of Words"></a>Continuious Bag of Words</h3><p>CBoW移除了前向反馈神经网络中非线性的hidden layer，直接将中间层的embedding layer与输出层的softmax layer连接。忽略上下文环境的序列信息：输入的所有词向量均汇总到同一个embedding layer，同时将future words纳入上下文环境。</p>
+<img title="CBoW结构图" alt="Continuous Bags of Words" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/cbow.png">
+<p>从数学上看，CBoW模型等价于一个词袋模型的向量乘以一个embedding矩阵，从而得到一个连续的embedding向量。这也是CBoW模型名称的由来。</p>
+<p>但由于在模型中有一个对context words向量SUM的操作，所以会损失一部分信息，往往效果不如skip-gram模型。但对于一些小量级对精度要求不高的问题情景下，可以使用CBoW快速得到词向量。</p>
+<h3 id="Skip-gram-Models"><a href="#Skip-gram-Models" class="headerlink" title="Skip-gram Models"></a>Skip-gram Models</h3><img title="skip-gram结构图" alt="Skip-gram Model" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/skip-gram.png">
+<p>Skip-gram模型的名称源于该模型在训练时会对上下文环境里的word进行采样，其前向计算过程如下：</p>
+<p>$$p(w_O|w_I)=\frac{\exp u_{w_O}^T v_{w_I}}{\sum_{w \in W}\exp u_w^T v_{w_I}}$$</p>
+<p>其中$v_I$是也被称为$w_I$的input vector。$u_I$是softmax层矩阵里的行向量，也被称为wj的output vector。</p>
+<p>因此，Skip-gram模型的本质是计算输入word的input vector与目标word的output vector之间的余弦相似度，并进行softmax归一化。我们要学习的模型参数正是这两类词向量。</p>
+<p>然而，直接对词典里的$W$个词计算相似度并归一化，显然是一件极其耗时的impossible mission。为此，Mikolov引入了两种优化算法：层次Softmax（Hierarchical Softmax）和负采样（Negative Sampling）。</p>
+<h4 id="Hierarchical-Softmax"><a href="#Hierarchical-Softmax" class="headerlink" title="Hierarchical Softmax"></a>Hierarchical Softmax</h4><p>层次Softmax是对完全Softmax分类的计算效率上的优化，最主要的优势就是不用再去计算每个输出结点上面的值（假设总共有$W$个输出结点），而只需要计算$log_2(W)$个输出结点上的值就可以估计整个神经网络的概率分布。这个想法最早是Bengio等人提出的。[7]</p>
+<p>将原有的$W$个输出结点作为一个二叉树的叶子结点，每个结点都是显示地表示其子结点的相对概率，通过随机游走得到这些word概率。在二叉树中每个word都对应着唯一一条从根结点到叶子结点的路径，$n(w,1)$到$n(w,l)$表示这条路径上的每个结点，共$L$层，所以$n(w,L)=w$。则：</p>
+<p>$$p(w|w_I) = \prod_{l=1}^{L-1} \frac{1}{1+\exp (x)}$$</p>
+<p>其中，$x = $<code>[if n(w, l+1) = n(w, l).child then 1 else -1]</code>$u_n^Tv_w$，就变为求这条唯一路径的概率问题，可以通过最大化这个似然函数来求解，降低了复杂度的量级。</p>
+<p>与使用标准Softmax层的Skip-gram模型不同的是，标准版中得到了是关于一个词$w$的输出向量$u_w$和输入向量$v_w$，而在层次Softmax版本中，得到的是每个词的输入向量$v_w$和每个非叶结点的输出向量$u_n$。但是二叉树的构造为增加词与词之间的耦合度，即一个词概率的计算可能会间接影响另一些词的出现的概率。Mikolov等人在文章中构造一棵Huffman树，事实证明Huffman树可以满足大部分实际应用的需求。</p>
+<h4 id="Negative-Sampling"><a href="#Negative-Sampling" class="headerlink" title="Negative Sampling"></a>Negative Sampling</h4><p>另外一种加速计算的方法就是负采样（Negative Sampling）[8]，主要目标是对于每一轮的迭代，不必计算每个正样本的值，而是加入一些负样本来近似地估计总体概率分布。思想类源于由Gutmann and Hyvarinen提出的Noise Contrast Estimation (NCE)：一个好的模型能最大化地把正负样本分开。鉴于NCE可以近似估计Softmax的对数概率，在Skip-gram模型中对其进行了简化，只保留了高质量的向量表示，因为那才是本模型关注的重点，负采样（NEG）的目标函数为：</p>
+<p>$$\log \sigma(u_{w_O}^T v_{w_I})+\sum_{i=1}^k \mathbb{E}_{w_i \sim P_n(W)}[\log \sigma(-u_{w_O}^T v_{w_I})])$$</p>
+<p>其中，公式后半部分表示从人为构造的负样本的正态分布$P_n(W)$中随机选出$k$个词对（words pair）作为负样本估计总体的最大似然概率。</p>
+<h2 id="不是结尾的结尾"><a href="#不是结尾的结尾" class="headerlink" title="不是结尾的结尾"></a>不是结尾的结尾</h2><p>攒了好久终于把这篇学习笔记写出来了，有很多大神已经把Word2Vec讲的很透彻了，可以参见<a href="http://www.cnblogs.com/iloveai/p/word2vec.html" target="_blank" rel="external">《Word2Vec的前世今生》</a>和<a href="http://licstar.net/archives/328" target="_blank" rel="external">《Deep Learning in NLP （一）词向量和语言模型》</a>。我follow的是集智俱乐部组织的<a href="https://swarma.github.io" target="_blank" rel="external">NLP &amp; DL课程</a>，软广一发，写的也基于自己的理解，若有不对之处欢迎讨论和指正。下一篇将介绍word2vec的实践。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>Turney, P. D., &amp; Pantel, P. (2010). From frequency to meaning: vector space models of semantics. Journal of Artificial Intelligence Research, 37(1).</li>
+<li>Baroni M, Dinu G, Kruszewski G. Don’t count, predict! A systematic comparison of context-counting vs. context-predicting semantic vectors[C]//ACL (1). 2014: 238-247.</li>
+<li>Bengio, Y., Ducharme, R., Vincent, P., &amp; Janvin, C. (2003). A neural probabilistic language model. The Journal of Machine Learning Research, 3, 1137–1155.</li>
+<li>Mikolov, T., Karafiát, M., Burget, L., &amp; Cernocký, J. (2010). Recurrent neural network based language model. Interspeech.</li>
+<li>Mikolov, T., Chen, K., Corrado, G., &amp; Dean, J. (2013, January 17). Efficient Estimation of Word Representations in Vector Space. arXiv.org.</li>
+<li>Mikolov, T., Sutskever, I., Chen, K., Corrado, G., &amp; Dean, J. (2013, October 17). Distributed Representations of Words and Phrases and their Compositionality. arXiv.org.</li>
+<li>Morin, F., &amp; Bengio, Y. (2005). Hierarchical Probabilistic Neural Network Language Model. Aistats.</li>
+<li>Mnih, A., &amp; Kavukcuoglu, K. (2013). Learning word embeddings efficiently with noise-contrastive estimation, 2265–2273.</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2016/07/31/word2vec-notes/">Word2Vec学习笔记</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Sicong Yang</a></p>
+        <p><span>Created:</span>2016-07-31, 21:19:33</p>
+        <p><span>Updated:</span>2016-07-31, 21:46:00</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2016/07/31/word2vec-notes/" title="Word2Vec学习笔记">http://jaybeka.github.io/2016/07/31/word2vec-notes/</a>
+            <span class="copy-path" data-clipboard-text="From http://jaybeka.github.io/2016/07/31/word2vec-notes/　　By Sicong Yang" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/07/31/coursera-A-Ng-ML-1/">
+                    Machine Learning - Andrew Ng on Coursera (Week 1)
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/07/03/kubernetes-coreos-on-vagrant/">
+                    基于Vagrant的CoreOS集群部署Kubernetes
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Word2Vec学习笔记"><span class="toc-number">1.</span> <span class="toc-text">Word2Vec学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#统计语言模型（Statistical-Language-Model）"><span class="toc-number">1.1.</span> <span class="toc-text">统计语言模型（Statistical Language Model）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Discrete-Representation"><span class="toc-number">1.1.1.</span> <span class="toc-text">Discrete Representation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Distributed-Representation"><span class="toc-number">1.1.2.</span> <span class="toc-text">Distributed Representation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Neural-Probabilistic-Language-Model"><span class="toc-number">1.2.</span> <span class="toc-text">Neural Probabilistic Language Model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Word2Vec"><span class="toc-number">1.3.</span> <span class="toc-text">Word2Vec</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Continuious-Bag-of-Words"><span class="toc-number">1.3.1.</span> <span class="toc-text">Continuious Bag of Words</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Skip-gram-Models"><span class="toc-number">1.3.2.</span> <span class="toc-text">Skip-gram Models</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Hierarchical-Softmax"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">Hierarchical Softmax</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Negative-Sampling"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">Negative Sampling</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不是结尾的结尾"><span class="toc-number">1.4.</span> <span class="toc-text">不是结尾的结尾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">1.5.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+<script>
+    var valueHide = "Hide";
+    var valueShow = "Show";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Word2Vec学习笔记　| Boom! Bang!　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/07/31/coursera-A-Ng-ML-1/" title="Pre: Machine Learning - Andrew Ng on Coursera (Week 1)">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/07/03/kubernetes-coreos-on-vagrant/" title="Next: 基于Vagrant的CoreOS集群部署Kubernetes">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/coursera-A-Ng-ML-1/">Machine Learning - Andrew Ng on Coursera (Week 1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/word2vec-notes/">Word2Vec学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/03/kubernetes-coreos-on-vagrant/">基于Vagrant的CoreOS集群部署Kubernetes</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/15/build-coreos-clusters-with-vagrant/">利用Vagrant搭建虚拟CoreOS集群</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/18/rnn-intuition-practice/">RNN的理解与实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Sicong Yang
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >Site Visitors: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">Page Hits: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

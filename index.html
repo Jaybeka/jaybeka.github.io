@@ -143,13 +143,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
-                        <li>友情链接</li>
+                        <li>Friends</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -186,7 +186,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreOS/">CoreOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deployment/">Deployment</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vagrant/">Vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreOS/">CoreOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coursera/">Coursera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deployment/">Deployment</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Natural-Language-Processing/">Natural Language Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vagrant/">Vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-1/">Week 1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/word2vec/">word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
                     </div>
                 </section>
                 
@@ -207,7 +207,7 @@
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">Interested on NLP, Deep learning and related fileds.</div>
+                    <div id="js-aboutme">Instereted in Machine Learning, Data Analysis and other related fields.</div>
                 </section>
                 
             </div>
@@ -257,9 +257,134 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-coursera-A-Ng-ML-1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/31/coursera-A-Ng-ML-1/" class="article-date">
+      <time datetime="2016-07-31T14:05:50.000Z" itemprop="datePublished">2016-07-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/31/coursera-A-Ng-ML-1/">Machine Learning - Andrew Ng on Coursera (Week 1)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h1 id="Machine-Learning-Andrew-Ng-on-Coursera-Week-1"><a href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-1" class="headerlink" title="Machine Learning - Andrew Ng on Coursera (Week 1)"></a>Machine Learning - Andrew Ng on Coursera (Week 1)</h1><p>接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第一周的课程，主要内容包括有监督式学习和无监督式学习、线性回归、成本函数、梯度下降算法等一些基础概念。</p>
+<h2 id="有监督式学习和无监督式学习"><a href="#有监督式学习和无监督式学习" class="headerlink" title="有监督式学习和无监督式学习"></a>有监督式学习和无监督式学习</h2><p>机器学习可以简单地理解为是从数据中学习一个映射函数$f(x) = y$，使得对于新的输入数据$x^{(i)}$预测其对应的$y^{(i)}$。机器学习的算法大致可以分为<strong>有监督学习（Supervised Learning)</strong>和<strong>无监督学习（Unsupervised Learning）</strong>两种。两者的区别主要在于在学习的过程中训练集数据是否提供了因变量$y$的信息，如果提供了$y$的信息，那么该过程就是有监督学习，否则就是无监督学习。典型的有监督式学习如分类算法、回归算法，分别针对的是离散值和连续值的预测；无监督式学习如聚类算法等，在搜索引擎，生物基因等领域也有着广泛的应用。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coursera/">Coursera</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Week-1/">Week 1</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/07/31/coursera-A-Ng-ML-1/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-word2vec-notes" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/31/word2vec-notes/" class="article-date">
+      <time datetime="2016-07-31T13:19:33.000Z" itemprop="datePublished">2016-07-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/31/word2vec-notes/">Word2Vec学习笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h1 id="Word2Vec学习笔记"><a href="#Word2Vec学习笔记" class="headerlink" title="Word2Vec学习笔记"></a>Word2Vec学习笔记</h1><p>Word2Vec是Google开源的一款用于计算词向量的工具，它可以对海量的词典和数据集上进行高效的训练，并得到稠密连续的词向量作为其他自然语言处理任务的基础。Word2Vec并不是一种算法，而是基于NLPM的高效实现，包含了CBoW和Skip-gram两个模型。本文将介绍统计语言模型中词向量的Discrete和Distributed Representation之间的区别，Word2Vec的模型一些细节。欢迎补充、指正并参与讨论。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Natural-Language-Processing/">Natural Language Processing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/word2vec/">word2vec</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/07/31/word2vec-notes/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-kubernetes-coreos-on-vagrant" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -529,14 +654,14 @@
                 2016 Sicong Yang
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >本站到访数: 
+                        <span id="site-visit" >Site Visitors: 
                             <span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
@@ -546,7 +671,7 @@
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">本页阅读量: 
+                        <span id="page-visit">Page Hits: 
                             <span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
@@ -579,9 +704,9 @@
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
