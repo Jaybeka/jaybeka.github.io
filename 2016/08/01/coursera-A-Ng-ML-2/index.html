@@ -15,21 +15,19 @@
 
 
 
-<meta name="description" content="Machine Learning - Andrew Ng on Coursera (Week 1)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第一周的课程，主要内容包括有监督式学习和无监督式学习、线性回归、成本函数、梯度下降算法等一些基础概念。
-有监督式学习和无监督式学习机器学">
+<meta name="description" content="Machine Learning - Andrew Ng on Coursera (Week 2)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第二周的课程，主要内容是设置作业环境以及多变量的线性回归。
+设置作业环境因为本课程涉及到在Octave或者Matlab提交作业，所以这一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Machine Learning - Andrew Ng on Coursera (Week 1)">
-<meta property="og:url" content="http://jaybeka.github.io/2016/07/31/coursera-A-Ng-ML-1/index.html">
+<meta property="og:title" content="Machine Learning - Andrew Ng on Coursera (Week 2)">
+<meta property="og:url" content="http://jaybeka.github.io/2016/08/01/coursera-A-Ng-ML-2/index.html">
 <meta property="og:site_name" content="Boom! Bang!">
-<meta property="og:description" content="Machine Learning - Andrew Ng on Coursera (Week 1)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第一周的课程，主要内容包括有监督式学习和无监督式学习、线性回归、成本函数、梯度下降算法等一些基础概念。
-有监督式学习和无监督式学习机器学">
-<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-lr-modelling.jpg">
-<meta property="og:updated_time" content="2016-08-01T13:44:12.000Z">
+<meta property="og:description" content="Machine Learning - Andrew Ng on Coursera (Week 2)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第二周的课程，主要内容是设置作业环境以及多变量的线性回归。
+设置作业环境因为本课程涉及到在Octave或者Matlab提交作业，所以这一">
+<meta property="og:updated_time" content="2016-08-01T14:12:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Machine Learning - Andrew Ng on Coursera (Week 1)">
-<meta name="twitter:description" content="Machine Learning - Andrew Ng on Coursera (Week 1)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第一周的课程，主要内容包括有监督式学习和无监督式学习、线性回归、成本函数、梯度下降算法等一些基础概念。
-有监督式学习和无监督式学习机器学">
-<meta name="twitter:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-lr-modelling.jpg">
+<meta name="twitter:title" content="Machine Learning - Andrew Ng on Coursera (Week 2)">
+<meta name="twitter:description" content="Machine Learning - Andrew Ng on Coursera (Week 2)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第二周的课程，主要内容是设置作业环境以及多变量的线性回归。
+设置作业环境因为本课程涉及到在Octave或者Matlab提交作业，所以这一">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -61,7 +59,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Machine Learning - Andrew Ng on Coursera (Week 1) | Boom! Bang!</title>
+<title>Machine Learning - Andrew Ng on Coursera (Week 2) | Boom! Bang!</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -260,11 +258,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-coursera-A-Ng-ML-1" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-coursera-A-Ng-ML-2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/31/coursera-A-Ng-ML-1/" class="article-date">
-      <time datetime="2016-07-31T14:05:50.000Z" itemprop="datePublished">2016-07-31</time>
+      <a href="/2016/08/01/coursera-A-Ng-ML-2/" class="article-date">
+      <time datetime="2016-08-01T13:37:42.000Z" itemprop="datePublished">2016-08-01</time>
 </a>
     </div>
   
@@ -277,7 +275,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Machine Learning - Andrew Ng on Coursera (Week 1)
+      Machine Learning - Andrew Ng on Coursera (Week 2)
     </h1>
   
 
@@ -288,7 +286,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coursera/">Coursera</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Week-1/">Week 1</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coursera/">Coursera</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Week-2/">Week 2</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -298,35 +296,51 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="Machine-Learning-Andrew-Ng-on-Coursera-Week-1"><a href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-1" class="headerlink" title="Machine Learning - Andrew Ng on Coursera (Week 1)"></a>Machine Learning - Andrew Ng on Coursera (Week 1)</h1><p>接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第一周的课程，主要内容包括有监督式学习和无监督式学习、线性回归、成本函数、梯度下降算法等一些基础概念。</p>
-<h2 id="有监督式学习和无监督式学习"><a href="#有监督式学习和无监督式学习" class="headerlink" title="有监督式学习和无监督式学习"></a>有监督式学习和无监督式学习</h2><p>机器学习可以简单地理解为是从数据中学习一个映射函数$f(x) = y$，使得对于新的输入数据$x^{(i)}$预测其对应的$y^{(i)}$。机器学习的算法大致可以分为<strong>有监督学习（Supervised Learning)</strong>和<strong>无监督学习（Unsupervised Learning）</strong>两种。两者的区别主要在于在学习的过程中训练集数据是否提供了因变量$y$的信息，如果提供了$y$的信息，那么该过程就是有监督学习，否则就是无监督学习。典型的有监督式学习如分类算法、回归算法，分别针对的是离散值和连续值的预测；无监督式学习如聚类算法等，在搜索引擎，生物基因等领域也有着广泛的应用。</p>
-<a id="more"></a>
-<p>如何对无监督学习的结果进行评价，这是一个很好的问题。通常是通过定义评价函数来对无监督学习算法的效果进行评价的，但在实际问题中，评价函数并不完全是数据的客观评价，而是结合问题求解目标的一种人为定义。<strong>半监督学习（Semi-Superviesed Learning）</strong>则是主要考虑如何利用少量的标注样本和大量的未标注样本进行训练和分类的问题。半监督学习对于减少标注代价，提高学习机器性能具有非常重大的实际意义。</p>
-<p>在整个课程中主要还是以介绍有监督学习为主，但是从有监督学习的学习中也可以从中看出机器学习对问题的切入点，慢慢也可以体会到机器学习是怎样定义一个学习任务的然后又是怎样进行学习的。</p>
-<h2 id="线性回归的模型表示及成本函数"><a href="#线性回归的模型表示及成本函数" class="headerlink" title="线性回归的模型表示及成本函数"></a>线性回归的模型表示及成本函数</h2><p>以<strong>线性回归（Linear Regression)</strong>为例切入整个课程的学习，将机器学习的主干任务串联起来。可以将实际问题抽象为具体的数学模型，具体建模过程如下图所示：</p>
-<img title="逻辑回归模型流程图" alt="逻辑回归模型流程图" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-lr-modelling.jpg">
-<p>课程中以对房子价格的预测为例，问题是：给定一批已知的房子大小和价格的对应关系数据，如何对一个给定大小的房子进行估值。模型大概可以分解为：</p>
+        <h1 id="Machine-Learning-Andrew-Ng-on-Coursera-Week-2"><a href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-2" class="headerlink" title="Machine Learning - Andrew Ng on Coursera (Week 2)"></a>Machine Learning - Andrew Ng on Coursera (Week 2)</h1><p>接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第二周的课程，主要内容是设置作业环境以及多变量的线性回归。</p>
+<h2 id="设置作业环境"><a href="#设置作业环境" class="headerlink" title="设置作业环境"></a>设置作业环境</h2><p>因为本课程涉及到在Octave或者Matlab提交作业，所以这一节讲了在各种不同的系统中如何安装Octave或者Matlab。安装比较简单，就不在此赘述。需要注意的有如下几点，如有其他疑问可私信或邮件讨论：</p>
 <ol>
-<li>假设（Hypothesis)：$h_\theta(x) = \theta_0 + \theta_1 x$.</li>
-<li>参数（Parameters)：$\theta_0$和$\theta_1$.</li>
-<li>成本函数（Cost Functions）：$J(\theta) = \frac{1}{2m}\sum^n_i{(h_{\theta}(x^{(i)}) - y^{(i)})^2}$</li>
-<li>优化目标：$\min J(\theta)$</li>
+<li>Windows下Octave不支持Https，因此建议使用Matlab；</li>
+<li>Matlab针对本课程有120天的免费授权，任意系统均可使用；</li>
+<li>Mac OS X可能需要更改安全与隐私权限才能安装从非App Store中下载的应用，推荐Octave-CLI（命令行版Octave，更稳定）。</li>
 </ol>
-<p>以上也是对一个机器学习问题的一般建模思路。</p>
-<h2 id="梯度下降算法"><a href="#梯度下降算法" class="headerlink" title="梯度下降算法"></a>梯度下降算法</h2><p>当然，对于线性回归问题可以直接利用数值求得解析解，但这里引入了<strong>梯度下降法(Gradient Descent Algorithm)</strong>展示机器学习算法的一般过程。梯度下降法的框架很简单，随机选择一个起点，然后按照梯度相反方向迭代直到收敛，公式如下：</p>
-<p>$$ \theta_j = \theta_j - \alpha \frac{\partial}{\partial\theta_j} J(\theta_0, \theta_1) $$</p>
-<p>其中$\alpha$是学习速率（Learning Rate），如果设置过小，算法迭代过程会相对很慢；而如果设置过大，算法可能无法达到最小值甚至无法收敛。课程中介绍了一种方法，即初始学习速率较大，随着向极值点靠近，学习速率也逐渐减小。</p>
-<p>为什么是负梯度方向呢？梯度是函数的每个参数的偏导数的向量，而这个向量方向是函数变化率最快的点。如果沿着梯度方向，那么函数会以最快的速率增长；而我们的目的是要快速迭代使用得函数尽可能达到最小值，那么必然是沿着负导数的方向更新参数。</p>
-<p>另外值得注意的是，在线性回归问题中，成本函数的3D图像是呈碗状的，即有全局最优。在其他问题的成本函数还可能存在除全局最优以外的极值点，也可称为局部最优。在这种情况下，算法可能会陷入局部最优的麻烦，这时可以采用随机选取其他的起始点再次利用梯度下降算法求解，比较两次结果取其中优者。</p>
-<h2 id="线性代数回顾"><a href="#线性代数回顾" class="headerlink" title="线性代数回顾"></a>线性代数回顾</h2><p>线性代数对于计算机科学来讲地位是非常重要的。Andrew和吴金闪老师都指出在计算矩阵乘法时，采用现有的矩阵运算包比自己用<code>for</code>循环写出来的效率要高。吴金闪老师还提到了Strassen算法，将大矩阵拆分成若干个小矩阵进行运算会降低求解的时间复杂度。同时，在诸如奇异值分解（Singular Value Decomposition）等算法中，线性代数有着广泛的应用。可以参考<a href="http://cs224d.stanford.edu/index.html" target="_blank" rel="external">Stanford cs224d</a>的<a href="http://cs229.stanford.edu/section/cs229-linalg.pdf" target="_blank" rel="external">线性代数Review</a>，了解一些线代的基础概念，主要包括了：</p>
+<a id="more"></a>
+<h2 id="多变量线性回归"><a href="#多变量线性回归" class="headerlink" title="多变量线性回归"></a>多变量线性回归</h2><p>上周课程主要针对的是单变量的线性回归问题，但往往实际问题并不仅仅有一个相关的变量，所以引入了多变量的线性回归问题。多变量问题中，$n$表示变量数量，$x^{(i)}$表示第$i$个训练样本，$x_j^{(i)}$则表示第$i$个训练样本中第$j$个变量的值。此时线性回归问题假设变成如下形式：</p>
+<p>$$h(x) = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + … + \theta_n x_n$$</p>
+<p>其中$x_0$是常数项，因此可以设为1。转化为向量后，<br>$$x =<br>\left[<br>\begin{array}{c}<br>    x_0 \\<br>    x_1 \\<br>    x_2 \\<br>    \vdots \\<br>    x_n<br>\end{array}<br>\right]<br>\in \mathbb{R}^{n+1}$$</p>
+<p>$$\theta = \left[<br>\begin{array}{c}<br>    \theta_0 \\<br>    \theta_1 \\<br>    \theta_2 \\<br>    \vdots \\<br>    \theta_n<br>\end{array}<br>\right]<br>\in \mathbb{R}^{n+1}$$</p>
+<p>$$h(x) = \theta^T x$$</p>
+<p>代价函数可以相应的变为：</p>
+<p>$$ J(\theta) = \frac{1}{2m}\sum_{i=1}^m(h_\theta(x^{(i)}) - y^{(i)})^2$$</p>
+<p>梯度下降中参数更新可以写成向量的形式：</p>
+<p>$$ \theta_j = \theta_j - \alpha\frac{1}{m}\sum_{i=1}^m(h_\theta(x^{(i)}) - y^{(i)})x_j^{(i)}$$</p>
+<p>因为各变量的取值范围会存在较大的差异，然而学习速度对于所有变量都是一致的，即不能取得太大以防止不收敛，又不能取得太小使收敛速度过慢，所以需要将变量取值范围进行统一（Feature Scaling），使各变量取值范围尽量在-1到1之间，同时，也尽量避免过于集中在$\pm0.001$甚至更小的区间内。通常采用mean normalization的方式，即：</p>
+<p>$$ x_i = \frac{x’_i - \mu_i}{range_i}$$</p>
+<p>有时需要使用多项式来拟合回归，且可以采用不同的方式。如课程中的例子，训练数据中价格与面积明显存在着非线性的关系，但用面积的二次方去拟合时，会出现达到一定面积后价格反而下降的现象，这在现实生活中几乎是不存在的。因此，可以添加面积的三次方项，或者平方根项来改变该情况，使价格一直随面积的增长而增长。当变量之间存在一定关系时，如变量1为面积，变量2为面积的平方时，相应的变量取值范围也要除以各自的取值范围，如课程中Andrew举的例子那样，除以面积范围，面积范围的平方，以及面积范围的3次方。</p>
+<p>还总结了学习速率$\alpha$取值的问题，要确保每一次迭代$J(\theta)$的值都在不断减小，可以预先定义如果迭代一次的下降差值在10e-3的范围内，就认为成本函数已经收敛并停止迭代。如果$J(\theta)$的值在上下波动或者不断增大，则说明$\alpha$取值过大，可以适当降低学习速率。</p>
+<h2 id="参数的解析算法"><a href="#参数的解析算法" class="headerlink" title="参数的解析算法"></a>参数的解析算法</h2><p>梯度下降是求解线性回归中一种比较直观的解法，但同时，对于参数$\theta$的求解也存在解析方法。以一维中最简单的线性回归成本函数为例，$J(\theta)=a\theta^2+b\theta+c$，在坐标轴中呈现为倒U型曲线，那么必然在$\frac{d}{d\theta}J(\theta)=0$处可取得成本函数的最小值，那么解得上式中$\theta$的值就可以得到其全局最小值。</p>
+<p>同样，将该方法推广到多变量的线性回归问题时，$\theta$可解如下公式求得：</p>
+<p>$$ \frac{\partial}{\partial\theta_j}J(\theta)=0 $$</p>
+<p>课程中给出了房价的例子及解析解公式如下，但并未给出具体的推导过程：</p>
+<p>$$ \theta=(X^T X)^{-1} X^T y $$</p>
+<p>以及相应的Octave命令：</p>
+<p><code>pinv(X’*X)*X’*y</code></p>
+<p>最后简单总结了梯度下降及解析算法的优缺点，其中比较重要我认为有两点：</p>
+<ol>
+<li>梯度下降算法在变量特别多的情况下也能顺利求解，但对于解析算法来说，如果变量过多可能会导致求解速度非常慢，主要是因为涉及到求解$(X^T X)$矩阵的逆。对于不同的计算机和不同的要求，变量的数量没有绝对的多和少，Andrew只给出了一般衡量标准，即$n\ge10000$时可以考虑采用梯度下降的算法，这在quiz中可能会涉及到这个判定范围。</li>
+<li>同样，因为解析算法涉及到求解$(X^T X)$矩阵的逆，所以在某些情况下可能无法求得，而不得不采用梯度下降的算法进行求解。当然，在一般情况下，解析算法由于不用设置学习速度和运算速度较快而被经常使用。</li>
+</ol>
+<h2 id="Octave简介"><a href="#Octave简介" class="headerlink" title="Octave简介"></a>Octave简介</h2><p>Andrew从以下方面介绍了Octave的一些基本命令，有兴趣的同学可以跟着课程视频都做一遍并完成课程作业：</p>
 <ul>
-<li>向量和矩阵</li>
-<li>矩阵加法和标量乘法</li>
-<li>矩阵和向量相乘</li>
-<li>矩阵和矩阵相乘</li>
-<li>矩阵的转置和逆</li>
+<li>基本的数学运算、逻辑运算、变量赋值和显示方法；</li>
+<li>矩阵的赋值，各种矩阵的生成命令； </li>
+<li>求矩阵的大小和基本的环境命令，如果进入目录，查看变量等； </li>
+<li>截取矩阵中的数据，合并多个矩阵；</li>
+<li>数据的计算方法，比如最大、最小值，求和，连乘等；</li>
+<li>画图的基本命令；</li>
+<li>for, while, if控制语句，以及函数的格式；</li>
+<li>如何将循环计算向量化；</li>
+<li>Normal Equation不可逆性，通常可能由于线性相关的变量以及变量冗余引起的，需要去掉相应的变量再进行尝试。</li>
 </ul>
-<p>若有不当之处，请大家指正，谢谢！接下来，将会follow <a href="http://cs224d.stanford.edu/index.html" target="_blank" rel="external">Stanford CS224d: Deep Learning for Natural Language Processing</a>这门课程，也会整理并发布学习笔记的，欢迎一起学习。^_^</p>
 
       
     </div>
@@ -335,13 +349,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/07/31/coursera-A-Ng-ML-1/">Machine Learning - Andrew Ng on Coursera (Week 1)</a></p>
+        <p><span>本文标题:</span><a href="/2016/08/01/coursera-A-Ng-ML-2/">Machine Learning - Andrew Ng on Coursera (Week 2)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Sicong Yang</a></p>
-        <p><span>发布时间:</span>2016-07-31, 22:05:50</p>
-        <p><span>最后更新:</span>2016-08-01, 21:44:12</p>
+        <p><span>发布时间:</span>2016-08-01, 21:37:42</p>
+        <p><span>最后更新:</span>2016-08-01, 22:12:23</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/07/31/coursera-A-Ng-ML-1/" title="Machine Learning - Andrew Ng on Coursera (Week 1)">http://jaybeka.github.io/2016/07/31/coursera-A-Ng-ML-1/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://jaybeka.github.io/2016/07/31/coursera-A-Ng-ML-1/　　作者: Sicong Yang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/01/coursera-A-Ng-ML-2/" title="Machine Learning - Andrew Ng on Coursera (Week 2)">http://jaybeka.github.io/2016/08/01/coursera-A-Ng-ML-2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jaybeka.github.io/2016/08/01/coursera-A-Ng-ML-2/　　作者: Sicong Yang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -354,15 +368,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/08/01/coursera-A-Ng-ML-2/">
-                    Machine Learning - Andrew Ng on Coursera (Week 2)
+                <a href="/2016/08/01/coursera-A-Ng-ML-3/">
+                    Machine Learning - Andrew Ng on Coursera (Week 3)
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/07/31/word2vec-notes/">
-                    Word2Vec学习笔记
+                <a href="/2016/07/31/coursera-A-Ng-ML-1/">
+                    Machine Learning - Andrew Ng on Coursera (Week 1)
                 </a>
             </div>
         
@@ -373,7 +387,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-1"><span class="toc-number">1.</span> <span class="toc-text">Machine Learning - Andrew Ng on Coursera (Week 1)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#有监督式学习和无监督式学习"><span class="toc-number">1.1.</span> <span class="toc-text">有监督式学习和无监督式学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性回归的模型表示及成本函数"><span class="toc-number">1.2.</span> <span class="toc-text">线性回归的模型表示及成本函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降算法"><span class="toc-number">1.3.</span> <span class="toc-text">梯度下降算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性代数回顾"><span class="toc-number">1.4.</span> <span class="toc-text">线性代数回顾</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-2"><span class="toc-number">1.</span> <span class="toc-text">Machine Learning - Andrew Ng on Coursera (Week 2)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设置作业环境"><span class="toc-number">1.1.</span> <span class="toc-text">设置作业环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多变量线性回归"><span class="toc-number">1.2.</span> <span class="toc-text">多变量线性回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数的解析算法"><span class="toc-number">1.3.</span> <span class="toc-text">参数的解析算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Octave简介"><span class="toc-number">1.4.</span> <span class="toc-text">Octave简介</span></a></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -430,7 +444,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Machine Learning - Andrew Ng on Coursera (Week 1)　| Boom! Bang!　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Machine Learning - Andrew Ng on Coursera (Week 2)　| Boom! Bang!　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -450,7 +464,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/08/01/coursera-A-Ng-ML-2/" title="上一篇: Machine Learning - Andrew Ng on Coursera (Week 2)">
+            <a href="/2016/08/01/coursera-A-Ng-ML-3/" title="上一篇: Machine Learning - Andrew Ng on Coursera (Week 3)">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -458,7 +472,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/07/31/word2vec-notes/" title="下一篇: Word2Vec学习笔记">
+            <a href="/2016/07/31/coursera-A-Ng-ML-1/" title="下一篇: Machine Learning - Andrew Ng on Coursera (Week 1)">
                 <i class="fa fa-angle-right"></i>
             </a>
         

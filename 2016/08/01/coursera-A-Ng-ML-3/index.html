@@ -15,21 +15,23 @@
 
 
 
-<meta name="description" content="Machine Learning - Andrew Ng on Coursera (Week 1)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第一周的课程，主要内容包括有监督式学习和无监督式学习、线性回归、成本函数、梯度下降算法等一些基础概念。
-有监督式学习和无监督式学习机器学">
+<meta name="description" content="Machine Learning - Andrew Ng on Coursera (Week 3)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第三周的课程，主要内容是分类问题的模型表示、逻辑回归和过拟合问题。
+分类问题及模型表示首先Andrew给出了几个例子来解释什么是分类问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Machine Learning - Andrew Ng on Coursera (Week 1)">
-<meta property="og:url" content="http://jaybeka.github.io/2016/07/31/coursera-A-Ng-ML-1/index.html">
+<meta property="og:title" content="Machine Learning - Andrew Ng on Coursera (Week 3)">
+<meta property="og:url" content="http://jaybeka.github.io/2016/08/01/coursera-A-Ng-ML-3/index.html">
 <meta property="og:site_name" content="Boom! Bang!">
-<meta property="og:description" content="Machine Learning - Andrew Ng on Coursera (Week 1)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第一周的课程，主要内容包括有监督式学习和无监督式学习、线性回归、成本函数、梯度下降算法等一些基础概念。
-有监督式学习和无监督式学习机器学">
-<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-lr-modelling.jpg">
-<meta property="og:updated_time" content="2016-08-01T13:44:12.000Z">
+<meta property="og:description" content="Machine Learning - Andrew Ng on Coursera (Week 3)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第三周的课程，主要内容是分类问题的模型表示、逻辑回归和过拟合问题。
+分类问题及模型表示首先Andrew给出了几个例子来解释什么是分类问题">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-classification.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-multiclass.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-one-vs-all.jpg">
+<meta property="og:updated_time" content="2016-08-01T14:09:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Machine Learning - Andrew Ng on Coursera (Week 1)">
-<meta name="twitter:description" content="Machine Learning - Andrew Ng on Coursera (Week 1)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第一周的课程，主要内容包括有监督式学习和无监督式学习、线性回归、成本函数、梯度下降算法等一些基础概念。
-有监督式学习和无监督式学习机器学">
-<meta name="twitter:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-lr-modelling.jpg">
+<meta name="twitter:title" content="Machine Learning - Andrew Ng on Coursera (Week 3)">
+<meta name="twitter:description" content="Machine Learning - Andrew Ng on Coursera (Week 3)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第三周的课程，主要内容是分类问题的模型表示、逻辑回归和过拟合问题。
+分类问题及模型表示首先Andrew给出了几个例子来解释什么是分类问题">
+<meta name="twitter:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-classification.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -61,7 +63,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Machine Learning - Andrew Ng on Coursera (Week 1) | Boom! Bang!</title>
+<title>Machine Learning - Andrew Ng on Coursera (Week 3) | Boom! Bang!</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -260,11 +262,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-coursera-A-Ng-ML-1" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-coursera-A-Ng-ML-3" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/31/coursera-A-Ng-ML-1/" class="article-date">
-      <time datetime="2016-07-31T14:05:50.000Z" itemprop="datePublished">2016-07-31</time>
+      <a href="/2016/08/01/coursera-A-Ng-ML-3/" class="article-date">
+      <time datetime="2016-08-01T13:37:47.000Z" itemprop="datePublished">2016-08-01</time>
 </a>
     </div>
   
@@ -277,7 +279,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Machine Learning - Andrew Ng on Coursera (Week 1)
+      Machine Learning - Andrew Ng on Coursera (Week 3)
     </h1>
   
 
@@ -288,7 +290,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coursera/">Coursera</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Week-1/">Week 1</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coursera/">Coursera</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Week-3/">Week 3</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -298,35 +300,52 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="Machine-Learning-Andrew-Ng-on-Coursera-Week-1"><a href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-1" class="headerlink" title="Machine Learning - Andrew Ng on Coursera (Week 1)"></a>Machine Learning - Andrew Ng on Coursera (Week 1)</h1><p>接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第一周的课程，主要内容包括有监督式学习和无监督式学习、线性回归、成本函数、梯度下降算法等一些基础概念。</p>
-<h2 id="有监督式学习和无监督式学习"><a href="#有监督式学习和无监督式学习" class="headerlink" title="有监督式学习和无监督式学习"></a>有监督式学习和无监督式学习</h2><p>机器学习可以简单地理解为是从数据中学习一个映射函数$f(x) = y$，使得对于新的输入数据$x^{(i)}$预测其对应的$y^{(i)}$。机器学习的算法大致可以分为<strong>有监督学习（Supervised Learning)</strong>和<strong>无监督学习（Unsupervised Learning）</strong>两种。两者的区别主要在于在学习的过程中训练集数据是否提供了因变量$y$的信息，如果提供了$y$的信息，那么该过程就是有监督学习，否则就是无监督学习。典型的有监督式学习如分类算法、回归算法，分别针对的是离散值和连续值的预测；无监督式学习如聚类算法等，在搜索引擎，生物基因等领域也有着广泛的应用。</p>
+        <h1 id="Machine-Learning-Andrew-Ng-on-Coursera-Week-3"><a href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-3" class="headerlink" title="Machine Learning - Andrew Ng on Coursera (Week 3)"></a>Machine Learning - Andrew Ng on Coursera (Week 3)</h1><p>接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第三周的课程，主要内容是分类问题的模型表示、逻辑回归和过拟合问题。</p>
+<h2 id="分类问题及模型表示"><a href="#分类问题及模型表示" class="headerlink" title="分类问题及模型表示"></a>分类问题及模型表示</h2><p>首先Andrew给出了几个例子来解释什么是分类问题，包括垃圾邮件的识别、在线交易的欺诈判别以及肿瘤是良性还恶性。从线性回归对连续值的预测转为了对离散值的预测。在只有两类的分类问题中，用0和1来表示否与是。在此情况下，便不宜用线性回归函数来分类，而需要选择另外的$h_\theta(x)$来解决此类问题，并且满足$0 \le h_\theta(x) \le 1$，于是选择了<strong>Sigmod函数</strong>，又称为<strong>Logistic函数</strong>。Sigmoid函数是一个在生物学中常见的S型的函数，在信息科学中，由于其单增以及反函数单增等性质，Sigmoid函数常被用作阈值函数，将变量映射到0,1之间，还被广泛应用于神经网络的激活函数中。因此，逻辑回归模型假设如下：</p>
 <a id="more"></a>
-<p>如何对无监督学习的结果进行评价，这是一个很好的问题。通常是通过定义评价函数来对无监督学习算法的效果进行评价的，但在实际问题中，评价函数并不完全是数据的客观评价，而是结合问题求解目标的一种人为定义。<strong>半监督学习（Semi-Superviesed Learning）</strong>则是主要考虑如何利用少量的标注样本和大量的未标注样本进行训练和分类的问题。半监督学习对于减少标注代价，提高学习机器性能具有非常重大的实际意义。</p>
-<p>在整个课程中主要还是以介绍有监督学习为主，但是从有监督学习的学习中也可以从中看出机器学习对问题的切入点，慢慢也可以体会到机器学习是怎样定义一个学习任务的然后又是怎样进行学习的。</p>
-<h2 id="线性回归的模型表示及成本函数"><a href="#线性回归的模型表示及成本函数" class="headerlink" title="线性回归的模型表示及成本函数"></a>线性回归的模型表示及成本函数</h2><p>以<strong>线性回归（Linear Regression)</strong>为例切入整个课程的学习，将机器学习的主干任务串联起来。可以将实际问题抽象为具体的数学模型，具体建模过程如下图所示：</p>
-<img title="逻辑回归模型流程图" alt="逻辑回归模型流程图" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-lr-modelling.jpg">
-<p>课程中以对房子价格的预测为例，问题是：给定一批已知的房子大小和价格的对应关系数据，如何对一个给定大小的房子进行估值。模型大概可以分解为：</p>
-<ol>
-<li>假设（Hypothesis)：$h_\theta(x) = \theta_0 + \theta_1 x$.</li>
-<li>参数（Parameters)：$\theta_0$和$\theta_1$.</li>
-<li>成本函数（Cost Functions）：$J(\theta) = \frac{1}{2m}\sum^n_i{(h_{\theta}(x^{(i)}) - y^{(i)})^2}$</li>
-<li>优化目标：$\min J(\theta)$</li>
-</ol>
-<p>以上也是对一个机器学习问题的一般建模思路。</p>
-<h2 id="梯度下降算法"><a href="#梯度下降算法" class="headerlink" title="梯度下降算法"></a>梯度下降算法</h2><p>当然，对于线性回归问题可以直接利用数值求得解析解，但这里引入了<strong>梯度下降法(Gradient Descent Algorithm)</strong>展示机器学习算法的一般过程。梯度下降法的框架很简单，随机选择一个起点，然后按照梯度相反方向迭代直到收敛，公式如下：</p>
-<p>$$ \theta_j = \theta_j - \alpha \frac{\partial}{\partial\theta_j} J(\theta_0, \theta_1) $$</p>
-<p>其中$\alpha$是学习速率（Learning Rate），如果设置过小，算法迭代过程会相对很慢；而如果设置过大，算法可能无法达到最小值甚至无法收敛。课程中介绍了一种方法，即初始学习速率较大，随着向极值点靠近，学习速率也逐渐减小。</p>
-<p>为什么是负梯度方向呢？梯度是函数的每个参数的偏导数的向量，而这个向量方向是函数变化率最快的点。如果沿着梯度方向，那么函数会以最快的速率增长；而我们的目的是要快速迭代使用得函数尽可能达到最小值，那么必然是沿着负导数的方向更新参数。</p>
-<p>另外值得注意的是，在线性回归问题中，成本函数的3D图像是呈碗状的，即有全局最优。在其他问题的成本函数还可能存在除全局最优以外的极值点，也可称为局部最优。在这种情况下，算法可能会陷入局部最优的麻烦，这时可以采用随机选取其他的起始点再次利用梯度下降算法求解，比较两次结果取其中优者。</p>
-<h2 id="线性代数回顾"><a href="#线性代数回顾" class="headerlink" title="线性代数回顾"></a>线性代数回顾</h2><p>线性代数对于计算机科学来讲地位是非常重要的。Andrew和吴金闪老师都指出在计算矩阵乘法时，采用现有的矩阵运算包比自己用<code>for</code>循环写出来的效率要高。吴金闪老师还提到了Strassen算法，将大矩阵拆分成若干个小矩阵进行运算会降低求解的时间复杂度。同时，在诸如奇异值分解（Singular Value Decomposition）等算法中，线性代数有着广泛的应用。可以参考<a href="http://cs224d.stanford.edu/index.html" target="_blank" rel="external">Stanford cs224d</a>的<a href="http://cs229.stanford.edu/section/cs229-linalg.pdf" target="_blank" rel="external">线性代数Review</a>，了解一些线代的基础概念，主要包括了：</p>
+<p>$$h_\theta(x) = g(\theta^T x)$$</p>
+<p>$$g(z) = \frac{1}{1 + e^z}$$</p>
+<p>$$h_\theta(x) = \frac{1}{1 + e^{\theta^T x}}$$</p>
+<p>而$h_\theta(x)$的输出结果，则表示在给定$x$和$\theta$条件下，$y=1$的概率，即：</p>
+<p>$$h_\theta(x) = P(y = 1|x;\theta)$$</p>
+<p>在使用时我们可以认为：</p>
 <ul>
-<li>向量和矩阵</li>
-<li>矩阵加法和标量乘法</li>
-<li>矩阵和向量相乘</li>
-<li>矩阵和矩阵相乘</li>
-<li>矩阵的转置和逆</li>
+<li>如果$h_\theta(x) \ge 0.5$，则$y = 1$。</li>
+<li>如果$h_\theta(x) &lt; 0.5$，则$y = 0$。</li>
 </ul>
-<p>若有不当之处，请大家指正，谢谢！接下来，将会follow <a href="http://cs224d.stanford.edu/index.html" target="_blank" rel="external">Stanford CS224d: Deep Learning for Natural Language Processing</a>这门课程，也会整理并发布学习笔记的，欢迎一起学习。^_^</p>
+<p>接下来引入了<strong>决策边界（Decision Boundary）</strong>的概念，如下图中紫色的斜线所示，这条线的表示实际上就是$h_\theta(x) = 0.5$的表达式，因此它是假设公式$h_\theta(x)$的属性，而非数据集的属性。</p>
+<img title="分类问题-决策边界" alt="分类问题-决策边界" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-classification.jpg">
+<p>对于不同的假设公式，当变量的数量、阶次不一样时（如双变量二次方程可以表示椭圆，更高阶的方程则可以表示更多非线性的决策边界），可以表示出不同的决策边界，以更好地将数据集分类并预测新数据的分类结果。</p>
+<h2 id="逻辑回归模型"><a href="#逻辑回归模型" class="headerlink" title="逻辑回归模型"></a>逻辑回归模型</h2><p>在定义了逻辑回归模型的$h_\theta(x)$之后，要求$\theta$还需要定义代价函数。回顾线性回归的代价函数，并将其变形写成更一般的形式，对于不同的问题只需要替换其中的$Cost(h_\theta(x^{(i)}), y^{(i)})$即可，如下所示：</p>
+<p>$$J(\theta) = \frac{1}{m}\sum_{i=1}^m\frac{1}{2}(h_\theta(x^{(i)}) - y^{(i)})^2$$</p>
+<p>$$Cost(h_\theta(x^{(i)}), y^{(i)}) = \frac{1}{2}(h_\theta(x^{(i)}) - y^{(i)})^2$$</p>
+<p>线性回归中，代价函数是凸函数，否则无法使用梯度下降的方式进行求解。好在逻辑回归的代价函数有着良好的性质，在无论$y$等于1还是0，都是单调的凸函数（函数图像可参见文末附件中相应部分），其代价函数$Cost(h_\theta(x^{(i)}), y^{(i)})$如下所示：</p>
+<p>$$\mathrm{Cost}(h_\theta(x),y)=\begin{cases} -\log h_\theta(x) &amp; \mathrm{if} y=1 \\ -\log( 1 - h_\theta(x)) &amp; \mathrm{if} y=0\end{cases}$$</p>
+<p>在将此代价函数代入$J(\theta)$的时候有个小技巧，可以将两个条件表达式转化成一个表达式：</p>
+<p>$$J(\theta) = -\frac{1}{m}[\sum_{i=1}^m y^{(i)}\log{h_\theta(x^{(i)})} + (1 - y^{(i)})(\log{(1 - h_\theta(x^{(i)})})]$$</p>
+<p>对上式就可采用梯度下降法拟合参数$\theta$了，迭代更新参数的方法同线性回归一样，不过需要注意的是在线性回归中$h_\theta(x) = \theta^T x$，而逻辑回归中$h_\theta(x) = \frac{1}{1 + e^{\theta^T x}}$。</p>
+<p>此外，还提到了几种梯度下降的优化算法，分别补充了一篇相关的文章，如果感兴趣可以做一个简单了解：</p>
+<ul>
+<li><a href="http://www.cnblogs.com/tornadomeet/p/3265225.html" target="_blank" rel="external">Conjugate Descent</a></li>
+<li><a href="http://blog.csdn.net/acdreamers/article/details/44664941" target="_blank" rel="external">BFGS</a></li>
+<li><a href="http://www.tuicool.com/articles/EviQ32m" target="_blank" rel="external">L-BFGS</a></li>
+</ul>
+<p>本课程中不要求理解优化算法的原理，也无需自己编写这些算法的代码，除非是数值计算方面的专家或者爱好者。一般直接调用现有的库就可以了，高效且方便。这些算法不需要选择具体的$\alpha$值，可以让算法更快收敛。接下来用Octave的<code>fminunc</code>命令实现了代价函数的优化求解过程。</p>
+<h2 id="多类别的分类问题"><a href="#多类别的分类问题" class="headerlink" title="多类别的分类问题"></a>多类别的分类问题</h2><p>当对象类别多于两个时，如邮件标识、医学诊断、天气等等，原有的双类分类问题就变成多类别的分类问题，如下图所示：</p>
+<img title="双类分类vs多类别分类" alt="双类分类vs多类别分类" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-multiclass.jpg">
+<p>此时可以采用一对多（one-vs-all）的分类方法，即对每一类训练一个分类器，将该类与其他所有类别分开。然后再用这些分类器判定新到数据属于各类的概率，取其最大者，如下图所示：</p>
+<img title="One-vs-all分类方法" alt="One-vs-all分类方法" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-one-vs-all.jpg">
+<h2 id="解决过拟合问题"><a href="#解决过拟合问题" class="headerlink" title="解决过拟合问题"></a>解决过拟合问题</h2><p>首先以三个线性回归的例子、三个逻辑回归的例子分别说明了什么是欠拟合（High bias）、过拟合（High variance）和刚刚好（Just right fitting…恕我也不知道怎么翻译贴切了）。以及解决过拟合的两种方法：</p>
+<ol>
+<li>减少特征值的数量，采用人工或者算法自动选择；</li>
+<li>正则化，矩阵特征值大小，看特征对结果的贡献赋予权重。</li>
+</ol>
+<p>然后引入了<strong>正则化（Regularization）</strong>的概念，即通过引入惩罚权重降低高次项对拟合结果的影响，简化假设公式，从而避免过拟合的现象。正则化代价函数如下所示：</p>
+<p>$$J(\theta) = \frac{1}{2m} [\sum_{i = 1}^{n}(h_\theta(x^{(i)}) - y^{(i)})^2 + \lambda\sum_{j = 1}^{n}\theta_j^2]$$</p>
+<p>分别是线性回归和逻辑回归为例，讲解了权重$\lambda$在更新参数时的策略。</p>
+<p>对于线性回归，在使用Normalization方法求解时，如果样本的数量小于特征的数量时，$X^T X$是不可逆的（奇异矩阵）或者退化的（Degenerated）；如果$\lambda \gt 0$，$(X^TX + \lambda\diag)$则该矩阵是可逆的（非奇异矩阵），可以用该方法求解。</p>
+<p>$$\theta = (X^TX + \lambda\begin{bmatrix}<br>0 &amp; &amp; &amp; &amp; \\<br> &amp; 1 &amp; &amp; &amp; \\<br> &amp; &amp; 1 &amp; &amp; \\<br> &amp; &amp; &amp; \ddots &amp; \\<br> &amp; &amp; &amp; &amp; 1<br>\end{bmatrix})^{-1} X^Ty$$</p>
+<p>到本课程的最后，Andrew说如果你掌握了到目前为止所学的课程，那么恭喜你，已经比硅谷中大部分的工程师牛逼了，可以用机器学习做产品赚大钱了。不管你们信不信，反正我是信了~</p>
 
       
     </div>
@@ -335,13 +354,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/07/31/coursera-A-Ng-ML-1/">Machine Learning - Andrew Ng on Coursera (Week 1)</a></p>
+        <p><span>本文标题:</span><a href="/2016/08/01/coursera-A-Ng-ML-3/">Machine Learning - Andrew Ng on Coursera (Week 3)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Sicong Yang</a></p>
-        <p><span>发布时间:</span>2016-07-31, 22:05:50</p>
-        <p><span>最后更新:</span>2016-08-01, 21:44:12</p>
+        <p><span>发布时间:</span>2016-08-01, 21:37:47</p>
+        <p><span>最后更新:</span>2016-08-01, 22:09:04</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/07/31/coursera-A-Ng-ML-1/" title="Machine Learning - Andrew Ng on Coursera (Week 1)">http://jaybeka.github.io/2016/07/31/coursera-A-Ng-ML-1/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://jaybeka.github.io/2016/07/31/coursera-A-Ng-ML-1/　　作者: Sicong Yang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/01/coursera-A-Ng-ML-3/" title="Machine Learning - Andrew Ng on Coursera (Week 3)">http://jaybeka.github.io/2016/08/01/coursera-A-Ng-ML-3/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jaybeka.github.io/2016/08/01/coursera-A-Ng-ML-3/　　作者: Sicong Yang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -353,16 +372,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/08/01/coursera-A-Ng-ML-2/">
-                    Machine Learning - Andrew Ng on Coursera (Week 2)
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/07/31/word2vec-notes/">
-                    Word2Vec学习笔记
+                <a href="/2016/08/01/coursera-A-Ng-ML-2/">
+                    Machine Learning - Andrew Ng on Coursera (Week 2)
                 </a>
             </div>
         
@@ -373,7 +386,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-1"><span class="toc-number">1.</span> <span class="toc-text">Machine Learning - Andrew Ng on Coursera (Week 1)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#有监督式学习和无监督式学习"><span class="toc-number">1.1.</span> <span class="toc-text">有监督式学习和无监督式学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性回归的模型表示及成本函数"><span class="toc-number">1.2.</span> <span class="toc-text">线性回归的模型表示及成本函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降算法"><span class="toc-number">1.3.</span> <span class="toc-text">梯度下降算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性代数回顾"><span class="toc-number">1.4.</span> <span class="toc-text">线性代数回顾</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-3"><span class="toc-number">1.</span> <span class="toc-text">Machine Learning - Andrew Ng on Coursera (Week 3)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分类问题及模型表示"><span class="toc-number">1.1.</span> <span class="toc-text">分类问题及模型表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑回归模型"><span class="toc-number">1.2.</span> <span class="toc-text">逻辑回归模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多类别的分类问题"><span class="toc-number">1.3.</span> <span class="toc-text">多类别的分类问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决过拟合问题"><span class="toc-number">1.4.</span> <span class="toc-text">解决过拟合问题</span></a></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -430,7 +443,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Machine Learning - Andrew Ng on Coursera (Week 1)　| Boom! Bang!　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Machine Learning - Andrew Ng on Coursera (Week 3)　| Boom! Bang!　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -450,15 +463,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/08/01/coursera-A-Ng-ML-2/" title="上一篇: Machine Learning - Andrew Ng on Coursera (Week 2)">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/07/31/word2vec-notes/" title="下一篇: Word2Vec学习笔记">
+            <a href="/2016/08/01/coursera-A-Ng-ML-2/" title="下一篇: Machine Learning - Andrew Ng on Coursera (Week 2)">
                 <i class="fa fa-angle-right"></i>
             </a>
         
