@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Sicong Yang" />
+
+
+
+<meta name="description" content="Machine Learning - Andrew Ng on Coursera (Week 5)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第五周的课程，主要内容是继续讲解神经网络，包括代价函数、后向算法以及如何用后向算法求解神经网络模型的技巧。
+代价函数及后向算法Cost">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Machine Learning - Andrew Ng on Coursera (Week 5)">
+<meta property="og:url" content="http://jaybeka.github.io/2016/08/02/coursera-A-Ng-ML-5/index.html">
+<meta property="og:site_name" content="Boom! Bang!">
+<meta property="og:description" content="Machine Learning - Andrew Ng on Coursera (Week 5)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第五周的课程，主要内容是继续讲解神经网络，包括代价函数、后向算法以及如何用后向算法求解神经网络模型的技巧。
+代价函数及后向算法Cost">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-nn-model.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-bp-pseudo.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-fp-nn.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-bp-process.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-gredient-estimation.jpg">
+<meta property="og:updated_time" content="2016-08-04T14:28:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Machine Learning - Andrew Ng on Coursera (Week 5)">
+<meta name="twitter:description" content="Machine Learning - Andrew Ng on Coursera (Week 5)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第五周的课程，主要内容是继续讲解神经网络，包括代价函数、后向算法以及如何用后向算法求解神经网络模型的技巧。
+代价函数及后向算法Cost">
+<meta name="twitter:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-nn-model.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternative" href="/atom.xml" title="Boom! Bang!" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Machine Learning - Andrew Ng on Coursera (Week 5) | Boom! Bang!</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+</head>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Sicong Yang</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Pull the triger! Make it happen!</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreOS/">CoreOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coursera/">Coursera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deployment/">Deployment</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Natural-Language-Processing/">Natural Language Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vagrant/">Vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-1/">Week 1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-2/">Week 2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-3/">Week 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-4/">Week 4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-5/">Week 5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-6/">Week 6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/word2vec/">word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Instereted in Machine Learning, Data Analysis and other related fields.</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Sicong Yang</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Sicong Yang</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Pull the triger! Make it happen!</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+</nav>
+      <div class="body-wrap"><article id="post-coursera-A-Ng-ML-5" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/02/coursera-A-Ng-ML-5/" class="article-date">
+      <time datetime="2016-08-02T13:19:09.000Z" itemprop="datePublished">2016-08-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Machine Learning - Andrew Ng on Coursera (Week 5)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coursera/">Coursera</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Week-5/">Week 5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Machine-Learning-Andrew-Ng-on-Coursera-Week-5"><a href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-5" class="headerlink" title="Machine Learning - Andrew Ng on Coursera (Week 5)"></a>Machine Learning - Andrew Ng on Coursera (Week 5)</h1><p>接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第五周的课程，主要内容是继续讲解神经网络，包括代价函数、后向算法以及如何用后向算法求解神经网络模型的技巧。</p>
+<h2 id="代价函数及后向算法"><a href="#代价函数及后向算法" class="headerlink" title="代价函数及后向算法"></a>代价函数及后向算法</h2><h3 id="Cost-function-代价函数"><a href="#Cost-function-代价函数" class="headerlink" title="Cost function(代价函数)"></a>Cost function(代价函数)</h3><p>首先回顾一下神经网络的结构：</p>
+<img title="神经网络结构" alt="神经网络结构" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-nn-model.jpg">
+<a id="more"></a>
+<p>其中：</p>
+<p>训练集是：$(x^{(1)},y^{(1)}),…,(x^{(m)},y^{(m)})$<br>$L$ = 神经网络的层数<br>$s_l$ = 第$l$层的单元个数（不包括偏置单元）</p>
+<p>对于一个分类问题来说：</p>
+<p>如果是一个二类分类(Binary classification)，那么$y = 0$或者$1$，在神经网络的输出层上只有一个输出单元；如果是一个多类分类(Multi-class classification), 那么在神经网络的输出层上有K个输出单元。</p>
+<p>在逻辑回归中，Cost Function的定义相对简单，如下所示：</p>
+<p>$$J(\theta)=-\frac{1}{m}\left[\sum_{i=1}^m y^{(i)}\log h_\theta(x^{(i)}) + (1-y^{(i)})\log(1-h_\theta(x^{(i)}))\right]+\frac{\lambda}{2m}\sum_{j=1}^m \theta_j^2$$</p>
+<p>由于神经网络的输出层通常有多个输出，属于$k$维向量，因此用如下的方式定义神经网络的Cost function:</p>
+<p>$$h_\Theta(x) \in \mathbb{R}^K$$</p>
+<p>$$(h_\Theta(x))_i = i^{th} output$$</p>
+<p>$$J(\Theta) = -\frac{1}{m}\left[\sum_{i=1}^m\sum_{k=1}^K y_k^{(i)}\log(h_\Theta(x^{(i)}))_k + (1 - y_k^{(i)})\log(1-(h_\Theta(x^{(i)}))_k\right]+\frac{\lambda}{2m}\sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{k=1}^{s_{l+1}}(\Theta_{ji}^{(l)})^2$$</p>
+<p>注意，对于训练集的每一个样本，都需要对输出层所有的输出单元计算cost并求和。</p>
+<h3 id="Backpropagation-algorithm-BP算法-or-反向传播算法"><a href="#Backpropagation-algorithm-BP算法-or-反向传播算法" class="headerlink" title="Backpropagation algorithm(BP算法 or 反向传播算法)"></a>Backpropagation algorithm(BP算法 or 反向传播算法)</h3><p>和线性回归或逻辑回归相似，求取神经网络的参数也可以采用梯度下降算法，但是和它们二者略微不同的是，神经网络相对复杂。前面已经给出神经网络的代价函数，目标是最小化代价函数:</p>
+<p>$$\min_\Theta J(\Theta)$$</p>
+<p>我们需要通过如下两个式子来计算梯度:</p>
+<ul>
+<li>$J(\Theta)$</li>
+<li>$\frac{\partial}{\partial\Theta_{ij}^{(l)}}J(\Theta)$</li>
+</ul>
+<p>在上一课“神经网络的表示”里，我们给出了前馈网络的计算方法（向量化实现），对于一个给定训练样本(x, y)的神经网络，首先通过“前向传播”的方式从输入层开始计算神经网络的每一层表示，直到输出层。</p>
+<p>在计算梯度时，我们引入反向传播算法，简称BP算法。反向算法的核心是最小化网络输出值和目标值之间的“误差”，所以这里首先引入一个关于误差的记号：</p>
+<p>$\delta_j^{(l)} = l$层 $j$节点的误差(error)</p>
+<p>注：有志于弄清楚为什么的同学可以参考Mitchell教授的经典书籍《机器学习》的第四章“人工神经网络”，有详细的说明。</p>
+<p>如下给出了一个完整的BP算法的流程伪代码：</p>
+<img title="后向算法流程伪代码" alt="后向算法流程伪代码" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-bp-pseudo.jpg">
+<p>我们需要计算每个节点的梯度，这里通过反向传播算法达到了。</p>
+<p>补充：</p>
+<blockquote>
+<p>我们最常用的神经网络就是BP网络，也叫多层前馈网络。BP是back propagation的所写，是反向传播的意思。我以前比较糊涂，因为一直不理解为啥一会叫前馈网络，一会叫BP（反向传播）网络，不是矛盾吗？其实是 这样的，前馈是从网络结构上来说的，是前一层神经元单向馈入后一层神经元，而后面的神经元没有反馈到之前的神经元；而BP网络是从网络的训练方法上来说 的，是指该网络的训练算法是反向传播算法，即神经元的链接权重的训练是从最后一层（输出层）开始，然后反向依次更新前一层的链接权重。因此二者并不矛盾， 只是我没有理解其精髓而已。</p>
+<p>随便提一下BP网络的强大威力：</p>
+<ol>
+<li>任何的布尔函数都可以由两层单元的网络准确表示，但是所需的隐藏层神经元的数量随网络输入数量呈指数级增长；</li>
+<li>任意连续函数都可由一个两层的网络以任意精度逼近。这里的两层网络是指隐藏层使用sigmoid单元、输出层使用非阈值的线性单元；</li>
+<li>任意函数都可由一个三层的网络以任意精度逼近。其两层隐藏层使用sigmoid单元、输出层使用非阈值的线性单元。</li>
+</ol>
+</blockquote>
+<p>【注】参考自《机器学习》</p>
+<h2 id="后向算法求解神经网络模型"><a href="#后向算法求解神经网络模型" class="headerlink" title="后向算法求解神经网络模型"></a>后向算法求解神经网络模型</h2><p>相对于线性回归或逻辑回归来说，BP算法不是很简洁和清晰，需要大家能明确区分的就是前向和后向算法。</p>
+<p>首先从前向传播说起，下面是一个前馈神经网络的例子：</p>
+<img title="前馈神经网络" alt="前馈神经网络" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-fp-nn.jpg">
+<p>对于这个神经网络来说，它有4层，除了输出层只有1个单元外，其他每层都有2个单元（除去偏置单元）。对于一个训练样本$(x^{(i)},y^{(i)})$来说，可以通过前向传播的方式计算各个相关单元，就是由输入计算分类结果的过程。</p>
+<p>而反向传播到底在做什么？首先简化神经网络的代价函数，假设仅关注一个样本$(x^{(i)},y^{(i)})$，并且仅针对一个输出单元的神经网络，同时忽略正则化（$\lambda = 0$），这样代价函数可以简化为如下的形式：</p>
+<p>$$cost(i) = y^{(i)}\log h_\Theta(x^{(i)}) + (1 - y^{(i)})\log h_\Theta(x^{(i)})$$</p>
+<p>那么对于样本$i$, 如果记$\delta_j^{(l)} = l$层 $j$节点$a_j^(l)$的误差(error)。而$\delta_j^{(l)} = \frac{\partial}{\partial z_j^{(l)}}cost(i)$。</p>
+<p>BP算法主要是从输出层反向计算各个节点的误差的，故称之为反向传播算法，对于上例，计算的过程如下图所示：</p>
+<img title="反向传播过程" alt="反向传播过程" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-bp-process.jpg">
+<p>注：这里有些细节没有详细描述，具体的可参考视频课程或者Mitchell教授的经典书籍《机器学习》的第四章“人工神经网络”。</p>
+<h3 id="Implementation-note-Unrolling-parameters-实现时的注意点：展开参数"><a href="#Implementation-note-Unrolling-parameters-实现时的注意点：展开参数" class="headerlink" title="Implementation note: Unrolling parameters(实现时的注意点：展开参数)"></a>Implementation note: Unrolling parameters(实现时的注意点：展开参数)</h3><p>本节主要讲的是利用octave实现神经网络算法的一个小技巧：将多个参数矩阵展开为一个向量。具体可以参考课程视频，此处略。</p>
+<h3 id="Gradient-checking-梯度下降算法的验证"><a href="#Gradient-checking-梯度下降算法的验证" class="headerlink" title="Gradient checking(梯度下降算法的验证)"></a>Gradient checking(梯度下降算法的验证)</h3><p>神经网络算法是一个很复杂的算法，所以有必要在实现的时候做一些检查，本节给出一个检验梯度的数值化方法。</p>
+<p>关于梯度，有一种比较简便的数值估计方法，例如，对于一元参数来说：</p>
+<img title="梯度数值估计" alt="梯度数值估计" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-gredient-estimation.jpg">
+<p>可以用如下公式近似估计梯度：</p>
+<p>$$\frac{d}{d\theta}J(\theta) \approx \frac{J(\theta+\epsilon)-J(\theta-\epsilon)}{2\epsilon}$$</p>
+<p>其中$\epsilon$取较小的值。</p>
+<p>同理，对于多元参数或参数向量来说，上述方法同样适用。我们的主要目标是检查这个梯度的近似向量与反向传播算法得到的梯度向量是否近似相等。</p>
+<p>实现时的注意点：</p>
+<ul>
+<li>首先实现反向传播算法来计算梯度向量DVec；</li>
+<li>其次实现梯度的近似gradApprox;</li>
+<li>确保以上两步计算的值是近似相等的；</li>
+<li>在实际的神经网络学习时使用反向传播算法，并且关掉梯度检查。</li>
+</ul>
+<p><strong>特别重要的是：</strong></p>
+<ul>
+<li>一定要确保在训练分类器时关闭梯度检查的代码。如果你在梯度下降的每轮迭代中都运行数值化的梯度计算，你的程序将会非常慢。</li>
+</ul>
+<h3 id="Random-initialization-随机初始化"><a href="#Random-initialization-随机初始化" class="headerlink" title="Random initialization(随机初始化)"></a>Random initialization(随机初始化)</h3><p>还有一点需要注意，就是如何初始化参数向量、矩阵。通常情况下，我们会将参数全部初始化为0，这对于很多问题是足够的，但是对于神经网络算法，可能会存在一些问题。</p>
+<p>对于梯度下降和其他优化算法，对于参数$\Theta$向量的初始化是必不可少的。在神经网络中，如果将参数全部初始化为0，可能会导致在每轮参数更新的时候，与输入单元相关的两个隐藏单元的结果将是相同的，即：</p>
+<p>$$a^{(2)}_1=a^{(2)}_2$$</p>
+<p>这个问题又称之为对称的权重问题，因此我们需要打破这种对称，这里提供一种随机初始化参数向量的方法：</p>
+<p>初始化$\theta^{(l)}_{ij}$为一个落在$[−\epsilon, \epsilon]$区间内的随机数，$\epsilon$可以很小，但是与梯度检验中的$\epsilon$没有任何关系。</p>
+<h3 id="Putting-it-together-组合到一起-如何训练一个神经网络"><a href="#Putting-it-together-组合到一起-如何训练一个神经网络" class="headerlink" title="Putting it together(组合到一起-如何训练一个神经网络)"></a>Putting it together(组合到一起-如何训练一个神经网络)</h3><p>首先需要确定一个神经网络的结构-神经元的连接模式，包括：</p>
+<ul>
+<li>输入单元的个数：特征$x^{(i)}$的维数；</li>
+<li>输出单元的格式：类的个数</li>
+<li>隐藏层的设计：比较合适的是1个隐藏层，如果隐藏层数大于1，确保每个隐藏层的单元个数相同，通常情况下隐藏层单元的个数越多越好。</li>
+</ul>
+<p>在确定好神经网络的结构后，我们按如下的步骤训练神经网络：</p>
+<ol>
+<li>随机初始化权重参数；</li>
+<li>对于每一个$x^{(i)}$通过前向传播得到$h_\theta(x^{(i)})$;</li>
+<li>计算代价函数$J(\Theta)$；</li>
+<li>反向传播算法用于计算偏导数$\frac{\partial}{\partial\Theta_{jk}^{(l)}}J(\Theta)$</li>
+<li>使用梯度检查来比较反向传播算法计算的$\frac{\partial}{\partial\Theta_{jk}^{(l)}}J(\Theta)$和数值估计的$J(\Theta)$的梯度，如果没有问题，在实际训练时关闭这部分代码；</li>
+<li>在反向传播的基础上使用梯度下降或其他优化算法来最小化$J(\Theta)$;</li>
+</ol>
+<h2 id="Backpropagation-example-Autonomous-driving-optional-BP算法的例子-无人驾驶汽车"><a href="#Backpropagation-example-Autonomous-driving-optional-BP算法的例子-无人驾驶汽车" class="headerlink" title="Backpropagation example: Autonomous driving (optional)(BP算法的例子-无人驾驶汽车)"></a>Backpropagation example: Autonomous driving (optional)(BP算法的例子-无人驾驶汽车)</h2><p>关于通过神经网络来实现一个无人驾驶汽车的例子，请大家参考课程视频，此处略。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2016/08/02/coursera-A-Ng-ML-5/">Machine Learning - Andrew Ng on Coursera (Week 5)</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Sicong Yang</a></p>
+        <p><span>Created:</span>2016-08-02, 21:19:09</p>
+        <p><span>Updated:</span>2016-08-04, 22:28:14</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2016/08/02/coursera-A-Ng-ML-5/" title="Machine Learning - Andrew Ng on Coursera (Week 5)">http://jaybeka.github.io/2016/08/02/coursera-A-Ng-ML-5/</a>
+            <span class="copy-path" data-clipboard-text="From http://jaybeka.github.io/2016/08/02/coursera-A-Ng-ML-5/　　By Sicong Yang" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/08/02/coursera-A-Ng-ML-6/">
+                    Machine Learning - Andrew Ng on Coursera (Week 6)
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/08/02/coursera-A-Ng-ML-4/">
+                    Machine Learning - Andrew Ng on Coursera (Week 4)
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-5"><span class="toc-number">1.</span> <span class="toc-text">Machine Learning - Andrew Ng on Coursera (Week 5)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代价函数及后向算法"><span class="toc-number">1.1.</span> <span class="toc-text">代价函数及后向算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cost-function-代价函数"><span class="toc-number">1.1.1.</span> <span class="toc-text">Cost function(代价函数)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Backpropagation-algorithm-BP算法-or-反向传播算法"><span class="toc-number">1.1.2.</span> <span class="toc-text">Backpropagation algorithm(BP算法 or 反向传播算法)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后向算法求解神经网络模型"><span class="toc-number">1.2.</span> <span class="toc-text">后向算法求解神经网络模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Implementation-note-Unrolling-parameters-实现时的注意点：展开参数"><span class="toc-number">1.2.1.</span> <span class="toc-text">Implementation note: Unrolling parameters(实现时的注意点：展开参数)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradient-checking-梯度下降算法的验证"><span class="toc-number">1.2.2.</span> <span class="toc-text">Gradient checking(梯度下降算法的验证)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Random-initialization-随机初始化"><span class="toc-number">1.2.3.</span> <span class="toc-text">Random initialization(随机初始化)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Putting-it-together-组合到一起-如何训练一个神经网络"><span class="toc-number">1.2.4.</span> <span class="toc-text">Putting it together(组合到一起-如何训练一个神经网络)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Backpropagation-example-Autonomous-driving-optional-BP算法的例子-无人驾驶汽车"><span class="toc-number">1.3.</span> <span class="toc-text">Backpropagation example: Autonomous driving (optional)(BP算法的例子-无人驾驶汽车)</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+<script>
+    var valueHide = "Hide";
+    var valueShow = "Show";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Machine Learning - Andrew Ng on Coursera (Week 5)　| Boom! Bang!　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/08/02/coursera-A-Ng-ML-6/" title="Pre: Machine Learning - Andrew Ng on Coursera (Week 6)">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/08/02/coursera-A-Ng-ML-4/" title="Next: Machine Learning - Andrew Ng on Coursera (Week 4)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/02/coursera-A-Ng-ML-6/">Machine Learning - Andrew Ng on Coursera (Week 6)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/02/coursera-A-Ng-ML-5/">Machine Learning - Andrew Ng on Coursera (Week 5)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/02/coursera-A-Ng-ML-4/">Machine Learning - Andrew Ng on Coursera (Week 4)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/01/coursera-A-Ng-ML-3/">Machine Learning - Andrew Ng on Coursera (Week 3)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/01/coursera-A-Ng-ML-2/">Machine Learning - Andrew Ng on Coursera (Week 2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/coursera-A-Ng-ML-1/">Machine Learning - Andrew Ng on Coursera (Week 1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/word2vec-notes/">Word2Vec学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/03/kubernetes-coreos-on-vagrant/">基于Vagrant的CoreOS集群部署Kubernetes</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/15/build-coreos-clusters-with-vagrant/">利用Vagrant搭建虚拟CoreOS集群</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/18/rnn-intuition-practice/">RNN的理解与实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Sicong Yang
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >Site Visitors: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">Page Hits: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

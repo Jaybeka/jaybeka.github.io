@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Sicong Yang" />
+
+
+
+<meta name="description" content="Machine Learning - Andrew Ng on Coursera (Week 6)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第六周的课程，主要内容是如何评价机器学习的算法并防止过拟合或者欠拟合。
+评价机器学习算法讨论在建立了模型假设，收集了相关数据以后接下来应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Machine Learning - Andrew Ng on Coursera (Week 6)">
+<meta property="og:url" content="http://jaybeka.github.io/2016/08/02/coursera-A-Ng-ML-6/index.html">
+<meta property="og:site_name" content="Boom! Bang!">
+<meta property="og:description" content="Machine Learning - Andrew Ng on Coursera (Week 6)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第六周的课程，主要内容是如何评价机器学习的算法并防止过拟合或者欠拟合。
+评价机器学习算法讨论在建立了模型假设，收集了相关数据以后接下来应">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-dim-err.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-dim-err-spec.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-lambda-err.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-learning-curve.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-size-err.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-lc-high-bias.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-lc-high-var.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-small-nn.jpg">
+<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-large-nn.jpg">
+<meta property="og:updated_time" content="2016-08-04T14:30:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Machine Learning - Andrew Ng on Coursera (Week 6)">
+<meta name="twitter:description" content="Machine Learning - Andrew Ng on Coursera (Week 6)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第六周的课程，主要内容是如何评价机器学习的算法并防止过拟合或者欠拟合。
+评价机器学习算法讨论在建立了模型假设，收集了相关数据以后接下来应">
+<meta name="twitter:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-dim-err.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternative" href="/atom.xml" title="Boom! Bang!" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Machine Learning - Andrew Ng on Coursera (Week 6) | Boom! Bang!</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+</head>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Sicong Yang</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Pull the triger! Make it happen!</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoreOS/">CoreOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coursera/">Coursera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deployment/">Deployment</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Natural-Language-Processing/">Natural Language Processing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RNN/">RNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vagrant/">Vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-1/">Week 1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-2/">Week 2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-3/">Week 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-4/">Week 4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-5/">Week 5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Week-6/">Week 6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/word2vec/">word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环神经网络/">循环神经网络</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Instereted in Machine Learning, Data Analysis and other related fields.</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Sicong Yang</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Sicong Yang</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Pull the triger! Make it happen!</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+</nav>
+      <div class="body-wrap"><article id="post-coursera-A-Ng-ML-6" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/02/coursera-A-Ng-ML-6/" class="article-date">
+      <time datetime="2016-08-02T13:19:16.000Z" itemprop="datePublished">2016-08-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Machine Learning - Andrew Ng on Coursera (Week 6)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coursera/">Coursera</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Week-6/">Week 6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Machine-Learning-Andrew-Ng-on-Coursera-Week-6"><a href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-6" class="headerlink" title="Machine Learning - Andrew Ng on Coursera (Week 6)"></a>Machine Learning - Andrew Ng on Coursera (Week 6)</h1><p>接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第六周的课程，主要内容是如何评价机器学习的算法并防止过拟合或者欠拟合。</p>
+<h2 id="评价机器学习算法"><a href="#评价机器学习算法" class="headerlink" title="评价机器学习算法"></a>评价机器学习算法</h2><p>讨论在建立了模型假设，收集了相关数据以后接下来应该怎么做。初步学习的算法往往不准确的，所以需要对学习算法进行调试和评估，以进行进一步的优化。<br>假设实现了一个正则化的线性回归算法来预测房价，使以下代价函数最小：</p>
+<p>$$J(\theta)=\frac{1}{2m}[\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2+\lambda\sum_{j=1}^{m}\theta_j^2]$$</p>
+<a id="more"></a>
+<p>然而，测试一批新的房屋数据时，发现预测出来的数据是很不准确的。那么，下一步你该怎么做？以下是一些备择选项，先把对应的情况也总结在这里，但最好在看完后面详细的解释的部分再回头来看看是否一一对应：</p>
+<ul>
+<li>获取更多的训练样本 - 解决高方差</li>
+<li>尝试使用更少的特征的集合 - 解决高方差</li>
+<li>尝试获得其他特征 - 解决高偏差</li>
+<li>尝试添加多项组合特征 - 解决高偏差</li>
+<li>尝试减小$\lambda$ - 解决高偏差</li>
+<li>尝试增加$\lambda$ -解决高方差获取更多的训练样本</li>
+</ul>
+<p>机器学习（算法）诊断(Diagnostic)是一种测试方法，能对当前学习算法进行深入的认识，知道算法是过拟合还是欠拟合，处于训练的什么阶段，并且能指导接下来如何做能最大限度的提高学习算法的性能。诊断测试虽然需要一些时间来实现，但是这样做可以使得机器学习算法实现更有效率。</p>
+<p>在房价预测问题中，如果假设如下：</p>
+<p>$$h_\theta(x)=\theta_0+\theta_1x+\theta_2x^2+\theta_3x^3+\theta_4x^4$$</p>
+<p>值得注意的是高阶项一般可以对训练数据做到非常好的拟合，但是对不在训练集的新数据的预测却很差，失去通用性。那我们应该如何评价这个假设？一个比较通用的做法是将数据集进行拆分，一部分（例如70%或者80%）作为训练集，另一部分（例如30%或者20%）作为测试集。对于模型假设，此时可以分为两步：</p>
+<ol>
+<li>通过最小化训练集的$J(\theta)$来学习参数$\theta$;</li>
+<li>再计算测试集的错误率，尽量减小测试集的$J_{test}(\theta)$</li>
+</ol>
+<p>一旦参数$\theta$对于某些数据集（训练集）适应（最终学习的参数），那么基于该数据及参数所计算的模型的训练误差$J(\theta)$很可能比实际泛化的$J_{test}(\theta)$要小。接下来面临的是模型选择（Model Selection）的问题，首先来看一个选择多项式回归模型的例子，假设有1-10次方的多项式回归模型，应该选择其中的哪一个模型？</p>
+<p>假设基于训练集学习得到的参数，然后选择测试集误差最小的5次方的多项式回归模型。那么这个模型的泛化能力如何？测试集的$J_{test}(\theta^{(5)})$基本能代表它的泛化能力，但是这是否准确？答案是不完全准确，同样会出现在训练集和测试集的误差都很小，但新数据的错误率仍然很高。因此，这里再引入第三个集合：交叉验证集，简明介绍可参考<a href="http://baike.baidu.com/view/1211084.htm" target="_blank" rel="external">此处</a>。一种比较典型的划分方式是60%的训练集，20%的交叉验证集以及20%的测试集。在实际使用时，我们通过训练集学习到参数, 再计算交叉验证集上的error, 再选择一个在验证集上误差最小的模型，最后再在测试集上估计模型的泛化误差(generalized error)。</p>
+<h2 id="Diagnosing-bias-vs-variance-诊断偏差和方差，模型多项式维度-d-J-theta-图"><a href="#Diagnosing-bias-vs-variance-诊断偏差和方差，模型多项式维度-d-J-theta-图" class="headerlink" title="Diagnosing bias vs. variance(诊断偏差和方差，模型多项式维度$d$ - $J(\theta)$图)"></a>Diagnosing bias vs. variance(诊断偏差和方差，模型多项式维度$d$ - $J(\theta)$图)</h2><p>通过观察欠拟合和过拟合的例子可以发现：</p>
+<ul>
+<li>当多项式回归模型的次数$d=1$，也就是高偏差(欠拟合)时，训练集误差和验证集误差都比较大；</li>
+<li>当$d=4$，也就是高方差(过拟合)时，训练集误差会很小（拟合的非常好），但是验证集误差却很大；</li>
+<li>当$d=2$，也就是拟合的刚刚好时，无论训练集误差还是验证集误差都刚刚好，介于上面两者之间。</li>
+</ul>
+<p>如果用图形表示，就是下面这个样子：</p>
+<img title="模型维度与错误率" alt="模型维度与错误率" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-dim-err.jpg">
+<p>有了上面的解释，我们就可以来诊断偏差还是方差的问题了。假设你的学习算法表现的不尽如人意，没有达到你的期望，如何来判定它是一个偏差的问题还是方差的问题？我们可以计算他们的训练集误差和交叉验证集误差，如果它们落入了上图的“头部”区域，可以判断是偏差（欠拟合）问题，如果落入了“尾部”区域，可以判断是方差（过拟合）问题。对于偏差还是方差的问题，可以做一个总结如下：</p>
+<ul>
+<li>欠拟合时，$J_{train}(\theta)$很大，$J_{cv}(\theta)\approx J_{train}(\theta)$</li>
+<li>过拟合时，$J_{train}(\theta)$很小，$J_{cv}(\theta)\gg J_{train}(\theta)$</li>
+</ul>
+<img title="模型维度与错误率-高偏差与高方差" alt="模型维度与错误率-高偏差与高方差" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-dim-err-spec.jpg">
+<h2 id="Regularization-and-bias-variance-正则化和偏差-方差，-lambda-J-theta-图"><a href="#Regularization-and-bias-variance-正则化和偏差-方差，-lambda-J-theta-图" class="headerlink" title="Regularization and bias/variance(正则化和偏差/方差，$\lambda$ - $J(\theta)$图)"></a>Regularization and bias/variance(正则化和偏差/方差，$\lambda$ - $J(\theta)$图)</h2><p>对于过拟合问题，正则化是一个非常有效的解决方案。如果正则化参数$\lambda$过大，则除了$\lambda_0$，其他参数都将近似为0，而形成了欠拟合或高偏差的情况。如果λ过小，例如$\lambda=0$，则等同于没有对线性回归模型进行正则化，而很容易出现过拟合高方差的问题。因此只有在$\lambda$选取适中的情况下，才能得到合适的拟合。本节讲解了如何求得最合适的$\lambda$值。</p>
+<p>对于数据集，仍将它划为3份：训练集、验证集、测试集。对于给定的正则化模型，例如上面的例子，我们按$\lambda$从小到大的顺序依次取数，然后在训练集上学习模型参数，在交叉验证集上计算验证集误差，并选择误差最小的模型, 也就是选择$\lambda$，最后再在测试集上评估假设：</p>
+<p>$$J(\theta)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2+\frac{\lambda}{2m}\sum_{j=1}^{m}\theta_j^2$$</p>
+<p>偏差/方差可以作为正则化参数$\lambda$的函数，与上一小节相似，我们也可以画出这个函数图，这样就能评估$\lambda$合适的取值范围了：</p>
+<img title="正则化项与错误率-高偏差与高方差" alt="正则化项与错误率-高偏差与高方差" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-lambda-err.jpg">
+<h2 id="Learning-curves-学习曲线，训练集大小-m-J-theta-图"><a href="#Learning-curves-学习曲线，训练集大小-m-J-theta-图" class="headerlink" title="Learning curves(学习曲线，训练集大小$m$ - $J(\theta)$图)"></a>Learning curves(学习曲线，训练集大小$m$ - $J(\theta)$图)</h2><p>这一小节考虑Learning curves（学习曲线）的问题，主要针对的是训练样本数目来观察训练集误差和验证集误差之间的差异：</p>
+<p>上图展现了训练样本数目和模型的关系。以二次项多项式回归为例，如果仅有一个训练样本，那么模型很容易和样本点拟合，训练集误差近似为0。也就是在训练集越小时模型越容易拟合样本点，而验证集误差可能会大一些；而当样本点比较多时，模型训练集误差会大一些，但是验证误集差会小一些。误差和训练样本数量$m$的关系，即学习曲线如下图所示：</p>
+<img title="学习曲线与训练集大小" alt="学习曲线与训练集大小" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-learning-curve.jpg">
+<img title="训练集大小与验证集错误率和测试集错误率" alt="训练集大小与验证集错误率和测试集错误率" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-size-err.jpg">
+<p>对于高偏差欠拟合问题，即使增大了训练样本数目，模型假设对于问题的拟合依然不够，导致训练集和验证集的误差都会比较大。因此下图是高偏差欠拟合问题的学习曲线：</p>
+<img title="高偏差时的学习曲线" alt="高偏差时的学习曲线" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-lc-high-bias.jpg">
+<p>当模型高偏差时，那么它的训练误差和验证集误差在一定的训练样本数目之后都很高，而且不会随着样本数目的增大而改变，所以对于高偏差欠拟合的问题，增加训练样本数目不是一个好的解决办法。</p>
+<p>而对于高方差过拟合问题，增大样本数目后，模型的泛化能力会好一些，下图是高方差过拟合问题的学习曲线：</p>
+<img title="高方差时的学习曲线" alt="高方差时的学习曲线" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-lc-high-var.jpg">
+<p>如果一个学习算法是高方差的，那么它的训练误差和验证集误差在一定的训练样本数目之后虽然有差异，但是会随着样本数目的增大而减小它们之间的距离，所以对于高方差过拟合的问题，增加训练样本数目是解决方法之一。</p>
+<h2 id="下一步该做什么？"><a href="#下一步该做什么？" class="headerlink" title="下一步该做什么？"></a>下一步该做什么？</h2><p>再次回到本章的开头的问题，假设你实现了一个正则化的线性回归算法来预测房价，然而当用它来测试一批新的房屋数据时，发现预测出来的数据很不准确时，下一步该采取什么措施？以下这些选项，分别针对的是高方差或高偏差的问题，你可以尝试用上述小节的一些方法来诊断你的学习算法，不过对于下述选项，需要你考虑一下是针对高偏差还是方差的问题，可以先思考一分钟再看答案：</p>
+<h2 id="神经网络中的过拟合问题"><a href="#神经网络中的过拟合问题" class="headerlink" title="神经网络中的过拟合问题"></a>神经网络中的过拟合问题</h2><p>最后我们再来看一下神经网络和过拟合的问题：</p>
+<p>以下是“小”的神经网络（参数比较少，很容易欠拟合）：</p>
+<img title="小规模神经网络-易欠拟合" alt="小规模神经网络-易欠拟合" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-small-nn.jpg">
+<p>它的计算代价较少。</p>
+<p>以下是“大”的神经网络（参数比较多，很容易过拟合):</p>
+<img title="大规模神经网络-易过拟合" alt="大规模神经网络-易过拟合" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-eval-large-nn.jpg">
+<p>它的计算代价较大，对于神经网络过拟合的问题，可以通过正则化($\lambda$)方法解决。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2016/08/02/coursera-A-Ng-ML-6/">Machine Learning - Andrew Ng on Coursera (Week 6)</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Sicong Yang</a></p>
+        <p><span>Created:</span>2016-08-02, 21:19:16</p>
+        <p><span>Updated:</span>2016-08-04, 22:30:33</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2016/08/02/coursera-A-Ng-ML-6/" title="Machine Learning - Andrew Ng on Coursera (Week 6)">http://jaybeka.github.io/2016/08/02/coursera-A-Ng-ML-6/</a>
+            <span class="copy-path" data-clipboard-text="From http://jaybeka.github.io/2016/08/02/coursera-A-Ng-ML-6/　　By Sicong Yang" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/08/02/coursera-A-Ng-ML-5/">
+                    Machine Learning - Andrew Ng on Coursera (Week 5)
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-6"><span class="toc-number">1.</span> <span class="toc-text">Machine Learning - Andrew Ng on Coursera (Week 6)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#评价机器学习算法"><span class="toc-number">1.1.</span> <span class="toc-text">评价机器学习算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Diagnosing-bias-vs-variance-诊断偏差和方差，模型多项式维度-d-J-theta-图"><span class="toc-number">1.2.</span> <span class="toc-text">Diagnosing bias vs. variance(诊断偏差和方差，模型多项式维度$d$ - $J(\theta)$图)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Regularization-and-bias-variance-正则化和偏差-方差，-lambda-J-theta-图"><span class="toc-number">1.3.</span> <span class="toc-text">Regularization and bias/variance(正则化和偏差/方差，$\lambda$ - $J(\theta)$图)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Learning-curves-学习曲线，训练集大小-m-J-theta-图"><span class="toc-number">1.4.</span> <span class="toc-text">Learning curves(学习曲线，训练集大小$m$ - $J(\theta)$图)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下一步该做什么？"><span class="toc-number">1.5.</span> <span class="toc-text">下一步该做什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#神经网络中的过拟合问题"><span class="toc-number">1.6.</span> <span class="toc-text">神经网络中的过拟合问题</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+<script>
+    var valueHide = "Hide";
+    var valueShow = "Show";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Machine Learning - Andrew Ng on Coursera (Week 6)　| Boom! Bang!　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/08/02/coursera-A-Ng-ML-5/" title="Next: Machine Learning - Andrew Ng on Coursera (Week 5)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/02/coursera-A-Ng-ML-6/">Machine Learning - Andrew Ng on Coursera (Week 6)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/02/coursera-A-Ng-ML-5/">Machine Learning - Andrew Ng on Coursera (Week 5)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/02/coursera-A-Ng-ML-4/">Machine Learning - Andrew Ng on Coursera (Week 4)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/01/coursera-A-Ng-ML-3/">Machine Learning - Andrew Ng on Coursera (Week 3)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/01/coursera-A-Ng-ML-2/">Machine Learning - Andrew Ng on Coursera (Week 2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/coursera-A-Ng-ML-1/">Machine Learning - Andrew Ng on Coursera (Week 1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/31/word2vec-notes/">Word2Vec学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/03/kubernetes-coreos-on-vagrant/">基于Vagrant的CoreOS集群部署Kubernetes</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/15/build-coreos-clusters-with-vagrant/">利用Vagrant搭建虚拟CoreOS集群</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/18/rnn-intuition-practice/">RNN的理解与实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Sicong Yang
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >Site Visitors: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">Page Hits: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
