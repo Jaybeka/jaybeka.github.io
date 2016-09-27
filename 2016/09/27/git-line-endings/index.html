@@ -15,23 +15,19 @@
 
 
 
-<meta name="description" content="Machine Learning - Andrew Ng on Coursera (Week 3)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第三周的课程，主要内容是分类问题的模型表示、逻辑回归和过拟合问题。
-分类问题及模型表示首先Andrew给出了几个例子来解释什么是分类问题">
+<meta name="description" content="在Git或者Github上进行跨平台项目合作开发时，会遇到换行符转换的问题。
+编辑文档的过程中，在按下回车键的时候实际上是向文档插入了一个不可见的换行符。在Windows系统中是CRLF (Carriage-Return Line-Feed，即回车换行）就是回车符CR (ASCII 13, \r)加上换行符LF (ASCII 10, \n)。在Linux/UNIX、OS X系统中只用换行符LF来标">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Machine Learning - Andrew Ng on Coursera (Week 3)">
-<meta property="og:url" content="http://jaybeka.github.io/2016/08/01/coursera-A-Ng-ML-3/index.html">
+<meta property="og:title" content="Git中LF will be replaced by CRLF问题原因及解决方法">
+<meta property="og:url" content="http://jaybeka.github.io/2016/09/27/git-line-endings/index.html">
 <meta property="og:site_name" content="Boom! Bang!">
-<meta property="og:description" content="Machine Learning - Andrew Ng on Coursera (Week 3)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第三周的课程，主要内容是分类问题的模型表示、逻辑回归和过拟合问题。
-分类问题及模型表示首先Andrew给出了几个例子来解释什么是分类问题">
-<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-classification.jpg">
-<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-multiclass.jpg">
-<meta property="og:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-one-vs-all.jpg">
-<meta property="og:updated_time" content="2016-08-04T14:14:26.000Z">
+<meta property="og:description" content="在Git或者Github上进行跨平台项目合作开发时，会遇到换行符转换的问题。
+编辑文档的过程中，在按下回车键的时候实际上是向文档插入了一个不可见的换行符。在Windows系统中是CRLF (Carriage-Return Line-Feed，即回车换行）就是回车符CR (ASCII 13, \r)加上换行符LF (ASCII 10, \n)。在Linux/UNIX、OS X系统中只用换行符LF来标">
+<meta property="og:updated_time" content="2016-09-27T12:15:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Machine Learning - Andrew Ng on Coursera (Week 3)">
-<meta name="twitter:description" content="Machine Learning - Andrew Ng on Coursera (Week 3)接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第三周的课程，主要内容是分类问题的模型表示、逻辑回归和过拟合问题。
-分类问题及模型表示首先Andrew给出了几个例子来解释什么是分类问题">
-<meta name="twitter:image" content="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-classification.jpg">
+<meta name="twitter:title" content="Git中LF will be replaced by CRLF问题原因及解决方法">
+<meta name="twitter:description" content="在Git或者Github上进行跨平台项目合作开发时，会遇到换行符转换的问题。
+编辑文档的过程中，在按下回车键的时候实际上是向文档插入了一个不可见的换行符。在Windows系统中是CRLF (Carriage-Return Line-Feed，即回车换行）就是回车符CR (ASCII 13, \r)加上换行符LF (ASCII 10, \n)。在Linux/UNIX、OS X系统中只用换行符LF来标">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -63,7 +59,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Machine Learning - Andrew Ng on Coursera (Week 3) | Boom! Bang!</title>
+<title>Git中LF will be replaced by CRLF问题原因及解决方法 | Boom! Bang!</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -262,11 +258,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-coursera-A-Ng-ML-3" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-git-line-endings" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/08/01/coursera-A-Ng-ML-3/" class="article-date">
-      <time datetime="2016-08-01T13:37:47.000Z" itemprop="datePublished">2016-08-01</time>
+      <a href="/2016/09/27/git-line-endings/" class="article-date">
+      <time datetime="2016-09-27T11:48:17.000Z" itemprop="datePublished">2016-09-27</time>
 </a>
     </div>
   
@@ -279,7 +275,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Machine Learning - Andrew Ng on Coursera (Week 3)
+      Git中LF will be replaced by CRLF问题原因及解决方法
     </h1>
   
 
@@ -290,7 +286,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coursera/">Coursera</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Week-3/">Week 3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/autocrlf/">autocrlf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -300,52 +296,93 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="Machine-Learning-Andrew-Ng-on-Coursera-Week-3"><a href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-3" class="headerlink" title="Machine Learning - Andrew Ng on Coursera (Week 3)"></a>Machine Learning - Andrew Ng on Coursera (Week 3)</h1><p>接下将整理并发布学习Coursera上Andrew Ng的Machine Learning课程系列学习笔记，旨在与更多的机器学习爱好者一起分享学习心得，共同进步。本篇第三周的课程，主要内容是分类问题的模型表示、逻辑回归和过拟合问题。</p>
-<h2 id="分类问题及模型表示"><a href="#分类问题及模型表示" class="headerlink" title="分类问题及模型表示"></a>分类问题及模型表示</h2><p>首先Andrew给出了几个例子来解释什么是分类问题，包括垃圾邮件的识别、在线交易的欺诈判别以及肿瘤是良性还恶性。从线性回归对连续值的预测转为了对离散值的预测。在只有两类的分类问题中，用0和1来表示否与是。在此情况下，便不宜用线性回归函数来分类，而需要选择另外的$h_\theta(x)$来解决此类问题，并且满足$0 \le h_\theta(x) \le 1$，于是选择了<strong>Sigmod函数</strong>，又称为<strong>Logistic函数</strong>。Sigmoid函数是一个在生物学中常见的S型的函数，在信息科学中，由于其单增以及反函数单增等性质，Sigmoid函数常被用作阈值函数，将变量映射到0,1之间，还被广泛应用于神经网络的激活函数中。因此，逻辑回归模型假设如下：</p>
+        <p>在Git或者Github上进行跨平台项目合作开发时，会遇到换行符转换的问题。</p>
+<p>编辑文档的过程中，在按下回车键的时候实际上是向文档插入了一个不可见的换行符。在Windows系统中是<code>CRLF</code> (Carriage-Return Line-Feed，即回车换行）就是回车符<code>CR</code> (ASCII 13, <code>\r</code>)加上换行符<code>LF</code> (ASCII 10, <code>\n</code>)。在Linux/UNIX、OS X系统中只用换行符<code>LF</code>来标识一行的结束。</p>
+<p>问题就来了，结尾换行符不一致在版本更新的时候就会导致不必要的麻烦，版本管理系统可能将换行符不一致视为对文件的修改。这当然不是我们所希望的，所幸，Git和Github有专门针对这个问题的解决方法。</p>
 <a id="more"></a>
-<p>$$h_\theta(x) = g(\theta^T x)$$</p>
-<p>$$g(z) = \frac{1}{1 + e^z}$$</p>
-<p>$$h_\theta(x) = \frac{1}{1 + e^{\theta^T x}}$$</p>
-<p>而$h_\theta(x)$的输出结果，则表示在给定$x$和$\theta$条件下，$y=1$的概率，即：</p>
-<p>$$h_\theta(x) = P(y = 1|x;\theta)$$</p>
-<p>在使用时我们可以认为：</p>
-<ul>
-<li>如果$h_\theta(x) \ge 0.5$，则$y = 1$。</li>
-<li>如果$h_\theta(x) &lt; 0.5$，则$y = 0$。</li>
-</ul>
-<p>接下来引入了<strong>决策边界（Decision Boundary）</strong>的概念，如下图中紫色的斜线所示，这条线的表示实际上就是$h_\theta(x) = 0.5$的表达式，因此它是假设公式$h_\theta(x)$的属性，而非数据集的属性。</p>
-<img title="分类问题-决策边界" alt="分类问题-决策边界" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-classification.jpg">
-<p>对于不同的假设公式，当变量的数量、阶次不一样时（如双变量二次方程可以表示椭圆，更高阶的方程则可以表示更多非线性的决策边界），可以表示出不同的决策边界，以更好地将数据集分类并预测新数据的分类结果。</p>
-<h2 id="逻辑回归模型"><a href="#逻辑回归模型" class="headerlink" title="逻辑回归模型"></a>逻辑回归模型</h2><p>在定义了逻辑回归模型的$h_\theta(x)$之后，要求$\theta$还需要定义代价函数。回顾线性回归的代价函数，并将其变形写成更一般的形式，对于不同的问题只需要替换其中的$Cost(h_\theta(x^{(i)}), y^{(i)})$即可，如下所示：</p>
-<p>$$J(\theta) = \frac{1}{m}\sum_{i=1}^m\frac{1}{2}(h_\theta(x^{(i)}) - y^{(i)})^2$$</p>
-<p>$$Cost(h_\theta(x^{(i)}), y^{(i)}) = \frac{1}{2}(h_\theta(x^{(i)}) - y^{(i)})^2$$</p>
-<p>线性回归中，代价函数是凸函数，否则无法使用梯度下降的方式进行求解。好在逻辑回归的代价函数有着良好的性质，在无论$y$等于1还是0，都是单调的凸函数（函数图像可参见文末附件中相应部分），其代价函数$Cost(h_\theta(x^{(i)}), y^{(i)})$如下所示：</p>
-<p>$$\mathrm{Cost}(h_\theta(x),y)=\begin{cases} -\log h_\theta(x) &amp; \mathrm{if} y=1 \\ -\log( 1 - h_\theta(x)) &amp; \mathrm{if} y=0\end{cases}$$</p>
-<p>在将此代价函数代入$J(\theta)$的时候有个小技巧，可以将两个条件表达式转化成一个表达式：</p>
-<p>$$J(\theta) = -\frac{1}{m}[\sum_{i=1}^m y^{(i)}\log{h_\theta(x^{(i)})} + (1 - y^{(i)})(\log{(1 - h_\theta(x^{(i)})})]$$</p>
-<p>对上式就可采用梯度下降法拟合参数$\theta$了，迭代更新参数的方法同线性回归一样，不过需要注意的是在线性回归中$h_\theta(x) = \theta^T x$，而逻辑回归中$h_\theta(x) = \frac{1}{1 + e^{\theta^T x}}$。</p>
-<p>此外，还提到了几种梯度下降的优化算法，分别补充了一篇相关的文章，如果感兴趣可以做一个简单了解：</p>
-<ul>
-<li><a href="http://www.cnblogs.com/tornadomeet/p/3265225.html" target="_blank" rel="external">Conjugate Descent</a></li>
-<li><a href="http://blog.csdn.net/acdreamers/article/details/44664941" target="_blank" rel="external">BFGS</a></li>
-<li><a href="http://www.tuicool.com/articles/EviQ32m" target="_blank" rel="external">L-BFGS</a></li>
-</ul>
-<p>本课程中不要求理解优化算法的原理，也无需自己编写这些算法的代码，除非是数值计算方面的专家或者爱好者。一般直接调用现有的库就可以了，高效且方便。这些算法不需要选择具体的$\alpha$值，可以让算法更快收敛。接下来用Octave的<code>fminunc</code>命令实现了代价函数的优化求解过程。</p>
-<h2 id="多类别的分类问题"><a href="#多类别的分类问题" class="headerlink" title="多类别的分类问题"></a>多类别的分类问题</h2><p>当对象类别多于两个时，如邮件标识、医学诊断、天气等等，原有的双类分类问题就变成多类别的分类问题，如下图所示：</p>
-<img title="双类分类vs多类别分类" alt="双类分类vs多类别分类" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-multiclass.jpg">
-<p>此时可以采用一对多（one-vs-all）的分类方法，即对每一类训练一个分类器，将该类与其他所有类别分开。然后再用这些分类器判定新到数据属于各类的概率，取其最大者，如下图所示：</p>
-<img title="One-vs-all分类方法" alt="One-vs-all分类方法" class="fancy-ctn fancybox" src="http://o86wlfaos.bkt.clouddn.com//images/coursera-ml-one-vs-all.jpg">
-<h2 id="解决过拟合问题"><a href="#解决过拟合问题" class="headerlink" title="解决过拟合问题"></a>解决过拟合问题</h2><p>首先以三个线性回归的例子、三个逻辑回归的例子分别说明了什么是欠拟合（High bias）、过拟合（High variance）和刚刚好（Just right fitting…恕我也不知道怎么翻译贴切了）。以及解决过拟合的两种方法：</p>
+<h2 id="Global-settings-for-line-endings"><a href="#Global-settings-for-line-endings" class="headerlink" title="Global settings for line endings"></a>Global settings for line endings</h2><p><code>git config core.autocrlf</code>命令可以管理换行符的识别，详细说明可以参考Git的<a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#Formatting-and-Whitespace" target="_blank" rel="external">帮助文档</a>。在Windows系统上，只要将该项设置为<code>true</code>就可以了。</p>
+<pre><code class="shell">$ git config --global core.autocrlf true
+# Configure Git on Windows to properly handle line endings
+</code></pre>
+<p>在Linux/UNIX、OS X系统上将该项设置为<code>input</code>。</p>
+<pre><code class="shell">$ git config --global core.autocrlf input
+# Configure Git on OS X or Linux to properly handle line endings
+</code></pre>
+<p>此时，Git会在Windows系统提交代码时将换行符转换成<code>LF</code>，checkout时转换为<code>CRLF</code>；在Linux/UNIX、OS X系统以及库中保留<code>LF</code>作为换行符。</p>
+<p>如果你是Windows程序员，且正在开发仅运行在Windows上的项目，可以设置<code>false</code>取消此功能，把回车符记录在库中：</p>
+<pre><code class="shell">$ git config --global core.autocrlf false
+</code></pre>
+<h2 id="Per-repository-settings"><a href="#Per-repository-settings" class="headerlink" title="Per-repository settings"></a>Per-repository settings</h2><p>当然，并非所有现实情况都那么完美，我就遇到了<a href="http://stackoverflow.com/a/38677770" target="_blank" rel="external">Stack Overflow这个帖子</a>上面的问题。我使用的操作系统是Windows，但是开发的项目需要在不能连接外网的CentOS虚拟机中运行，多是Python、Shell脚本。在Linux/UNIX系统中，Windows的换行符会被当作特殊字符处理，可能会影响程序运行并报错。</p>
+<blockquote>
+<p>附上处理该类问题的一点经验：</p>
+<p>对于逻辑没有问题但运行一直报错的程序可用<code>vi -b</code>查看源文件，看每行末尾是否有粗体<code>^M</code>字符。如果有就说明是换行符在作怪，可用<code>1, $ s/^M//g</code>命令进行替换。其中，<code>^M</code>字符需按<code>ctrl</code>+<code>v</code>+<code>m</code>组合键输入。</p>
+</blockquote>
+<p>此时问题就来了，如果直接设置<code>core.autocrlf</code>为<code>true</code>的话，在签出时会将其自动转换成<code>CRLF</code>换行符，在提交代码时会报<code>warning: LF will be replaced by CRLF</code>。该警告一般是项目中出现了<code>CRLF</code>和<code>LF</code>换行符混用的情况，<code>LF</code>在提交时会被自动转换成<code>CRLF</code>。对于Windows和UNIX混用的情况显然全局的设置就不太合适了，需要针对该项目设置具体换行符。</p>
+<p>建立一个<em>.gitattributes</em>文件，每一行开始是文件名的pattern，即具体的文件类型，空格后是指定具体使用的换行符。下面是我在<a href="https://help.github.com/articles/dealing-with-line-endings/#example" target="_blank" rel="external">官方例子</a>中加入了<em>.sh</em>脚本文件的换行符指定，这样就会更明确每个设置项的意义。</p>
+<pre><code># Set the default behavior, in case people don&apos;t have core.autocrlf set.
+* text=auto
+
+# Explicitly declare text files you want to always be normalized and converted
+# to native line endings on checkout.
+*.c text
+*.h text
+
+# Declare files that will always have CRLF line endings on checkout.
+*.sln text eol=crlf
+
+# Declare files that will always have LF line endings on checkout.
+*.sh text eol=lf
+
+# Denote all files that are truly binary and should not be modified.
+*.png binary
+*.jpg binary
+</code></pre><p>在处理这类Windows和UNIX混用的项目时要更加小心，建议使用专门的文本编辑器来打开此类文件，并且在IDE或者文本编辑器统一设置换行符为<code>LF</code>以及编辑环境为UNIX。</p>
+<h2 id="Refreshing-a-repository-after-changing-line-endings"><a href="#Refreshing-a-repository-after-changing-line-endings" class="headerlink" title="Refreshing a repository after changing line endings"></a>Refreshing a repository after changing line endings</h2><p>当设置了<code>core.autocrlf</code>选项或者添加了<em>.gitattributes</em>以后，可以提交编辑后的源文件。此时，Git会帮助你转换每个文件中的换行符。</p>
+<p>最好按照<a href="https://help.github.com/articles/dealing-with-line-endings/#refreshing-a-repository-after-changing-line-endings" target="_blank" rel="external">Github帮助文档</a>配置并备份文件。首先要删除<strong>除<em>.git</em>文件夹外</strong>的所有文件，然后重建文件。</p>
 <ol>
-<li>减少特征值的数量，采用人工或者算法自动选择；</li>
-<li>正则化，矩阵特征值大小，看特征对结果的贡献赋予权重。</li>
+<li><p>保存当文件，保证所发生的修改不丢失。</p>
+<pre><code class="shell">$ git add . -u
+$ git commit -m &quot;Saving files before refreshing line endings&quot;
+</code></pre>
+</li>
+<li><p>删除Git本地库的索引</p>
+<pre><code class="bash">$ git rm --cached -r .
+</code></pre>
+</li>
+<li><p>重写Git本地库索引确认新的换行符</p>
+<pre><code class="shell">$ git reset --hard
+</code></pre>
+</li>
+<li><p>将所有文件重新添加，准备提交。这时也是一个机会检查哪些文件的换行符还有问题，屏幕会输出提示。</p>
+<pre><code class="shell">$ git add .
+# It is perfectly safe to see a lot of messages here that read
+# &quot;warning: CRLF will be replaced by LF in file.&quot;
+</code></pre>
+</li>
+<li><p>提交代码。</p>
+<pre><code class="shell">$ git commit -m &quot;Normalize all the line endings&quot;
+</code></pre>
+</li>
 </ol>
-<p>然后引入了<strong>正则化（Regularization）</strong>的概念，即通过引入惩罚权重降低高次项对拟合结果的影响，简化假设公式，从而避免过拟合的现象。正则化代价函数如下所示：</p>
-<p>$$J(\theta) = \frac{1}{2m} [\sum_{i = 1}^{n}(h_\theta(x^{(i)}) - y^{(i)})^2 + \lambda\sum_{j = 1}^{n}\theta_j^2]$$</p>
-<p>分别是线性回归和逻辑回归为例，讲解了权重$\lambda$在更新参数时的策略。</p>
-<p>对于线性回归，在使用Normalization方法求解时，如果样本的数量小于特征的数量时，$X^T X$是不可逆的（奇异矩阵）或者退化的（Degenerated）；如果$\lambda \gt 0$，$(X^TX + \lambda\diag)$则该矩阵是可逆的（非奇异矩阵），可以用该方法求解。</p>
-<p>$$\theta = (X^TX + \lambda\begin{bmatrix}<br>0 &amp; &amp; &amp; &amp; \\<br> &amp; 1 &amp; &amp; &amp; \\<br> &amp; &amp; 1 &amp; &amp; \\<br> &amp; &amp; &amp; \ddots &amp; \\<br> &amp; &amp; &amp; &amp; 1<br>\end{bmatrix})^{-1} X^Ty$$</p>
-<p>到本课程的最后，Andrew说如果你掌握了到目前为止所学的课程，那么恭喜你，已经比硅谷中大部分的工程师牛逼了，可以用机器学习做产品赚大钱了。不管你们信不信，反正我是信了~</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>网上有一些方法很暴力，直接将<em>.git</em>文件夹删除后重新建库，把<code>core.autocrlf</code>设置为<code>false</code>也没有说明为什么。所以还是需要搞清楚原理根据项目的情况来设置：</p>
+<ol>
+<li><p>一般情况下建议Windows用户将<code>core.autocrlf</code>设置为<code>true</code>，UNIX用户将<code>core.autocrlf</code>设置为<code>input</code>。</p>
+</li>
+<li><p>如果有Windows和UNIX系统混用的项目时，针对该项目确认IDE以及文本编辑器的换行符设置和每种文件类型的换行符，并添加<em>.gitattributes</em>文件。</p>
+</li>
+<li><p>不太建议把<code>core.autocrlf</code>设置为<code>false</code>即使你的项目是纯Windows项目。我是小心谨慎的性格，人生总有太多难免嘛</p>
+</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><p><a href="http://stackoverflow.com/questions/1510798/trying-to-fix-line-endings-with-git-filter-branch-but-having-no-luck/1511273#1511273" target="_blank" rel="external">newline - Trying to fix line-endings with git filter-branch, but having no luck - Stack Overflow</a></p>
+</li>
+<li><p><a href="http://stackoverflow.com/questions/1967370/git-replacing-lf-with-crlf" target="_blank" rel="external">git replacing LF with CRLF - Stack Overflow</a></p>
+</li>
+<li><p><a href="https://help.github.com/articles/dealing-with-line-endings/#refreshing-a-repository-after-changing-line-endings" target="_blank" rel="external">Dealing with line endings - GitHub Help</a></p>
+</li>
+<li><p><a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#Formatting-and-Whitespace" target="_blank" rel="external">Formatting and Whitespace - Git - Git Configuration</a></p>
+</li>
+</ol>
 
       
     </div>
@@ -354,13 +391,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/08/01/coursera-A-Ng-ML-3/">Machine Learning - Andrew Ng on Coursera (Week 3)</a></p>
+        <p><span>本文标题:</span><a href="/2016/09/27/git-line-endings/">Git中LF will be replaced by CRLF问题原因及解决方法</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Sicong Yang</a></p>
-        <p><span>发布时间:</span>2016-08-01, 21:37:47</p>
-        <p><span>最后更新:</span>2016-08-04, 22:14:26</p>
+        <p><span>发布时间:</span>2016-09-27, 19:48:17</p>
+        <p><span>最后更新:</span>2016-09-27, 20:15:59</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/08/01/coursera-A-Ng-ML-3/" title="Machine Learning - Andrew Ng on Coursera (Week 3)">http://jaybeka.github.io/2016/08/01/coursera-A-Ng-ML-3/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://jaybeka.github.io/2016/08/01/coursera-A-Ng-ML-3/　　作者: Sicong Yang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/09/27/git-line-endings/" title="Git中LF will be replaced by CRLF问题原因及解决方法">http://jaybeka.github.io/2016/09/27/git-line-endings/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jaybeka.github.io/2016/09/27/git-line-endings/　　作者: Sicong Yang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -372,16 +409,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/08/02/coursera-A-Ng-ML-4/">
-                    Machine Learning - Andrew Ng on Coursera (Week 4)
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/08/01/coursera-A-Ng-ML-2/">
-                    Machine Learning - Andrew Ng on Coursera (Week 2)
+                <a href="/2016/08/02/coursera-A-Ng-ML-6/">
+                    Machine Learning - Andrew Ng on Coursera (Week 6)
                 </a>
             </div>
         
@@ -392,7 +423,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Machine-Learning-Andrew-Ng-on-Coursera-Week-3"><span class="toc-number">1.</span> <span class="toc-text">Machine Learning - Andrew Ng on Coursera (Week 3)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分类问题及模型表示"><span class="toc-number">1.1.</span> <span class="toc-text">分类问题及模型表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑回归模型"><span class="toc-number">1.2.</span> <span class="toc-text">逻辑回归模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多类别的分类问题"><span class="toc-number">1.3.</span> <span class="toc-text">多类别的分类问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决过拟合问题"><span class="toc-number">1.4.</span> <span class="toc-text">解决过拟合问题</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Global-settings-for-line-endings"><span class="toc-number">1.</span> <span class="toc-text">Global settings for line endings</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Per-repository-settings"><span class="toc-number">2.</span> <span class="toc-text">Per-repository settings</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Refreshing-a-repository-after-changing-line-endings"><span class="toc-number">3.</span> <span class="toc-text">Refreshing a repository after changing line endings</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -449,7 +480,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Machine Learning - Andrew Ng on Coursera (Week 3)　| Boom! Bang!　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Git中LF will be replaced by CRLF问题原因及解决方法　| Boom! Bang!　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -469,15 +500,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/08/02/coursera-A-Ng-ML-4/" title="上一篇: Machine Learning - Andrew Ng on Coursera (Week 4)">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/08/01/coursera-A-Ng-ML-2/" title="下一篇: Machine Learning - Andrew Ng on Coursera (Week 2)">
+            <a href="/2016/08/02/coursera-A-Ng-ML-6/" title="下一篇: Machine Learning - Andrew Ng on Coursera (Week 6)">
                 <i class="fa fa-angle-right"></i>
             </a>
         
